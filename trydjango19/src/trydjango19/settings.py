@@ -37,8 +37,17 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'posts',
+    # third party
+    'crispy_forms',
+    'markdown_deux',
+    'pagedown',
+
+    # local apps
+    'comment',
+    'posts'
 ]
+
+CRISPY_TEMPLATE_PACK = 'bootstrap3'
 
 MIDDLEWARE_CLASSES = [
     'django.middleware.security.SecurityMiddleware',
@@ -50,7 +59,7 @@ MIDDLEWARE_CLASSES = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
-
+LOGIN_URL = "/login/"
 ROOT_URLCONF = 'trydjango19.urls'
 
 TEMPLATES = [
