@@ -2,7 +2,7 @@ asgiref==3.2.7
 autopep8==1.5
 cmsplugin-pagedown==0.0.2
 dj-database-url==0.5.0
-Django==1.9
+Django==1.11.28
 django-crispy-forms==1.6.0
 django-heroku==0.3.1
 django-markdown-deux==1.0.5
