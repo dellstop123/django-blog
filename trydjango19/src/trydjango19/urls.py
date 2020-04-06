@@ -21,10 +21,10 @@ from django.contrib import admin
 from accounts.views import (login_view, register_view, logout_view)
 
 urlpatterns = [
-    url(r'^', login_view, name='login'),
+    url(r'^admin/', admin.site.urls),
+    url(r'^$', login_view, name='login'),
     url(r'^posts/', include("posts.urls", namespace="posts")),
     url(r'^comments/', include("comment.urls", namespace='comment')),
-    url(r'^admin/', admin.site.urls),
     url(r'^register/', register_view, name='register'),
     url(r'^login/', login_view, name='login'),
     url(r'^logout/', logout_view, name='logout'),
