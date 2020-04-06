@@ -1,1 +1,1 @@
-"web: gunicorn trydjang019.wsgi" 
+web:gunicorn src.wsgi --log-file -
