@@ -1,0 +1,25 @@
+{% extends "base.html" %} {% load crispy_forms_tags %} {% block content %}
+
+<style>
+  body {
+    /* background-color: #d9edf7; */
+    background-image: url("https://insights.dice.com/wp-content/uploads/2017/09/shutterstock_315465929.jpg");
+  }
+</style>
+<div class="col-sm-6 col-sm-offset-3">
+  <h1>{{ title }}</h1>
+
+  <hr />
+  
+  
+    <form method="POST" action="" enctype="multipart/form-data">
+      {% csrf_token %} {{ form|crispy }}
+      <input
+        type="submit"
+        class="btn btn-primary btn-lg btn-block"
+        value="{{ title }}"
+      />
+    </form>
+  </div>
+</div>
+{% endblock content %}
