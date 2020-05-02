@@ -56,7 +56,9 @@
           <a href='{% url "register" %}'>Register</a>
         </li>
         <li class="pull-right"><a href='{% url "login" %}'>Login</a></li>
-        {% else %} {% if request.path == '/posts/' %}
+        {% else %}
+        <!--  -->
+        {% if request.path == '/posts/' %}
         <li class="pull-center">
           <a href='{% url "create" %}'>Create Blog</a>
         </li>
@@ -64,15 +66,11 @@
         <!--  -->
         {% if request.user.is_authenticated %}
         <!--  -->
-        {% if instance and not request.path == '/profile/' %}
+        {% if instance %}
         <li class="pull-center">
           <a href=" {{ request.path }}edit ">Edit Blog</a>
         </li>
-        {% endif %}
-        <!--  -->
-        {% if request.user.is_authenticated %}
-        <!--  -->
-        {% if instance and not request.path == '/profile/' %}
+
         <li class="pull-center">
           <a href="{{ request.path }}delete">Delete Blog</a>
         </li>
@@ -85,7 +83,7 @@
           <a href='{% url "profile" %}'>Profile</a>
         </li>
 
-        {% endif %}{% endif %}
+        {% endif %}
       </ol>
       {% block content %}{% endblock content %}
     </div>

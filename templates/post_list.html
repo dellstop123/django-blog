@@ -1,6 +1,6 @@
 {% extends "base.html" %}{% load crispy_forms_tags %} {% block content %}
 <!--  -->
-{% include "sidenav.html" %}
+
 <div class="col-sm-6 col-sm-offset-3">
   <h1 class="col-sm-6 col-sm-offset-3">{{ title }}</h1>
 
@@ -79,4 +79,4 @@
     </span>
   </div>
 </div>
-{% endblock content %}
+{% include "sidenav.html" %} {% endblock content %}

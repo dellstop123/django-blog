@@ -86,10 +86,9 @@ def posts_detail(request, slug=None):
 def posts_list(request, id=None):
     today = timezone.now().date()
     queryset_list = Post.objects.active()
-
+    title_list = Post.objects.all()
     if request.user.is_staff or request.user.is_superuser:
         queryset_list = Post.objects.all()
-        title_list = Post.objects.all()
     query = request.GET.get("q")
     if query:
         queryset_list = queryset_list.filter(
@@ -113,7 +112,7 @@ def posts_list(request, id=None):
         "title": "Django Blog",
         "page_request_var": page_request_var,
         "today": today,
-        "title_list": title_list
+        "title_list": title_list,
 
     }
     return render(request, "post_list.html", context)

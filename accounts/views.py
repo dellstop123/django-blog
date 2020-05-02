@@ -7,12 +7,16 @@ from django.contrib.auth import (
 )
 from django.shortcuts import render, redirect
 from django.contrib import messages
+import os
 from .email import mail
 from .forms import UserLoginForm, UserRegisterForm
 
 
 def login_view(request):
     print(request.user.is_authenticated())
+    password = os.getenv('PASSWORD')
+    email = os.environ.get('EMAIL')
+    print(password, email)
     next = request.GET.get('next')
     title = "Login"
     form = UserLoginForm(request.POST or None)
