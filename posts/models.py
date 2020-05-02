@@ -100,3 +100,10 @@ def pre_save_post_reciever(sender, instance, *args, **kwargs):
 
 
 pre_save.connect(pre_save_post_reciever, sender=Post)
+
+
+class User(models.Model):
+    username = models.CharField(max_length=120)
+    email = models.EmailField()
+    first_name = models.CharField(max_length=120)
+    last_name = models.CharField(max_length=120)

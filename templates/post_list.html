@@ -1,13 +1,10 @@
-{% extends "base.html" %} {% block content %}
-<style>
-  body {
-    /* background-color: #d9edf7; */
-    background-image: url("https://insights.dice.com/wp-content/uploads/2017/09/shutterstock_315465929.jpg");
-  }
-</style>
+{% extends "base.html" %}{% load crispy_forms_tags %} {% block content %}
+<!--  -->
+{% include "sidenav.html" %}
 <div class="col-sm-6 col-sm-offset-3">
-  <h1>{{ title }}</h1>
-  <form method="GET" action="">
+  <h1 class="col-sm-6 col-sm-offset-3">{{ title }}</h1>
+
+  <form method="GET" action="" class="col-sm-6 col-sm-offset-3">
     <input
       type="text"
       name="q"
@@ -30,17 +27,21 @@
           <h3>Staff Only: Future Post</h3>
           {% endif %}
           <h3>
-            <a href="{{ obj.get_absolute_url }}">{{ obj.title }}</a>
+            <a href="{{ obj.get_absolute_url }}" style="word-wrap: break-word;"
+              >{{ obj.title|linebreaks|truncatechars:120 }}</a
+            >
             <small>{{ obj.publish }}</small>
           </h3>
           {% if obj.user.get_full_name %}
           <p>Author: {{ obj.user.get_full_name }}</p>
           {% endif %}
-          <p>{{ obj.content|linebreaks|truncatechars:200 }}</p>
+          <p class="post-detail-item">
+            {{ obj.content|linebreaks|truncatechars:200 }}
+          </p>
           <p>
             <a
               href="{{ obj.get_absolute_url }}"
-              class="btn btn-primary"
+              class="btn btn-primary btn-sm btn-block"
               role="button"
               >View</a
             >
@@ -56,23 +57,26 @@
     <span class="step-links">
       {% if object_list.has_previous %}
       <a
+        style="color: black;"
+        type="button"
         href="?{{ page_request_var }}={{ object_list.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}"
-        >previous</a
       >
+        Previous
+      </a>
       {% endif %}
 
-      <span class="current">
+      <span class="current" style="color: black;">
         Page {{ object_list.number }} of {{ object_list.paginator.num_pages }}.
       </span>
 
       {% if object_list.has_next %}
       <a
+        style="color: black;"
         href="?{{ page_request_var }}={{ object_list.next_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}"
-        >next</a
+        >Next</a
       >
       {% endif %}
     </span>
   </div>
 </div>
-
 {% endblock content %}

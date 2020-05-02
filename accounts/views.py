@@ -6,7 +6,8 @@ from django.contrib.auth import (
 
 )
 from django.shortcuts import render, redirect
-
+from django.contrib import messages
+from .email import mail
 from .forms import UserLoginForm, UserRegisterForm
 
 
@@ -38,6 +39,9 @@ def register_view(request):
         user.save()
         new_user = authenticate(username=user.username, password=password)
         login(request, new_user)
+        mail(user.email)
+        messages.success(request, "Email Sent Successfully",
+                         extra_tags='html_safe')
         if next:
             return redirect(next)
         return redirect("/posts")

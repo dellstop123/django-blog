@@ -45,13 +45,16 @@
     </script>
 
     {% include "messages_display.html" %}
+
     <div class="container">
       <ol class="breadcrumb">
         <li><a href='{% url "posts:list" %}'>Home</a></li>
         {% block post_detail_link %} {% endblock %}
         <!-- <div></div> -->
         {% if not request.user.is_authenticated %}
-        <li class="pull-right"><a href='{% url "register" %}'>Register</a></li>
+        <li class="pull-right">
+          <a href='{% url "register" %}'>Register</a>
+        </li>
         <li class="pull-right"><a href='{% url "login" %}'>Login</a></li>
         {% else %} {% if request.path == '/posts/' %}
         <li class="pull-center">
@@ -61,25 +64,35 @@
         <!--  -->
         {% if request.user.is_authenticated %}
         <!--  -->
-        {% if instance %}
+        {% if instance and not request.path == '/profile/' %}
         <li class="pull-center">
           <a href=" {{ request.path }}edit ">Edit Blog</a>
         </li>
-        {% endif %}{% if instance and request.user.is_authenticated%}
+        {% endif %}
+        <!--  -->
+        {% if request.user.is_authenticated %}
+        <!--  -->
+        {% if instance and not request.path == '/profile/' %}
         <li class="pull-center">
           <a href="{{ request.path }}delete">Delete Blog</a>
         </li>
         {% endif %}{% endif %}
 
-        <li class="pull-right"><a href='{% url "logout" %}'>Logout</a></li>
-        {% endif %}
+        <li class="pull-right">
+          <a href='{% url "logout" %}'>Logout</a>
+        </li>
+        <li class="pull-right">
+          <a href='{% url "profile" %}'>Profile</a>
+        </li>
+
+        {% endif %}{% endif %}
       </ol>
       {% block content %}{% endblock content %}
     </div>
 
     <!-- Latest compiled and minified JavaScript -->
     <script
-      src="http://code.jquery.com/jquery-1.12.2.min.js"
+      src="https://code.jquery.com/jquery-1.12.2.min.js"
       integrity="sha256-lZFHibXzMHo3GGeehn1hudTAP3Sc0uKXBXAzHX1sjtk="
       crossorigin="anonymous"
     ></script>
@@ -140,5 +153,10 @@
         // preview-content
       });
     </script>
+    {% if request.user.is_authenticated %}
+    <!--  -->
+    {% include "footer.html" %}
+    <!--  -->
+    {% endif %}
   </body>
 </html>

@@ -1,0 +1,81 @@
+{% block content %}
+<!--  -->
+{% load staticfiles %}
+<link rel="stylesheet" href='{% static "css/footer.css" %}' />
+<link
+  rel="stylesheet"
+  href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css"
+/>
+
+<link
+  href="https://fonts.googleapis.com/css?family=Cookie"
+  rel="stylesheet"
+  type="text/css"
+/>
+<div>
+  <footer class="footer-distributed">
+    <div class="footer-left">
+      <img
+        src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Blogger.svg/1200px-Blogger.svg.png"
+      />
+      <h3>Django<span>Blog</span></h3>
+
+      <p class="footer-links">
+        <a href='{% url "posts:list" %}'>Home</a>
+        |
+        <a href='{% url "about" %}'>About</a>
+        |
+        <a href='{% url "contact" %}'>Contact</a>
+      </p>
+
+      <p class="footer-company-name">
+        © 2020 Django-Blogs Pvt. Ltd.
+      </p>
+    </div>
+
+    <div class="footer-center">
+      <div>
+        <i class="fa fa-map-marker"></i>
+        <p>
+          <span>Floor 9, Flat -E903, Antriksh Kanball 3g, Sector-77</span>
+          Noida, U.P - 201301
+        </p>
+      </div>
+
+      <div>
+        <i class="fa fa-phone"></i>
+        <p>+91 7006777505</p>
+      </div>
+      <div>
+        <i class="fa fa-envelope"></i>
+        <p>
+          <a href="mailto:guneetsinghbali@gmail.com"
+            >guneetsinghbali@gmail.com</a
+          >
+        </p>
+      </div>
+    </div>
+    <div class="footer-right">
+      <p class="footer-company-about">
+        <span>About the company</span>
+        We are uploading Tech Based Blogs in this website to make students
+        up-to-date with new features and technologies.
+      </p>
+      <div class="footer-icons">
+        <a href="https://www.facebook.com/guneet.singh.710"
+          ><i class="fa fa-facebook"></i
+        ></a>
+        <a href="https://twitter.com/Guneet28008606"
+          ><i class="fa fa-twitter"></i
+        ></a>
+        <a href="https://www.instagram.com/guneet_singh_007/"
+          ><i class="fa fa-instagram"></i
+        ></a>
+        <a href="https://www.linkedin.com/guneet-singh-709703182"
+          ><i class="fa fa-linkedin"></i
+        ></a>
+      </div>
+    </div>
+  </footer>
+</div>
+{% endblock content %}

@@ -3,11 +3,13 @@ from django.contrib import messages
 from django.utils import timezone
 from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import Post
+from .models import Post, User
+from django.contrib.auth.models import User
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib.contenttypes.models import ContentType
-from .forms import PostForm
+from .forms import PostForm, ProfileForm
 from django.db.models import Q
+from accounts.views import login_view
 from comment.forms import CommentForm
 from comment.models import Comment
 
@@ -84,8 +86,10 @@ def posts_detail(request, slug=None):
 def posts_list(request, id=None):
     today = timezone.now().date()
     queryset_list = Post.objects.active()
+
     if request.user.is_staff or request.user.is_superuser:
         queryset_list = Post.objects.all()
+        title_list = Post.objects.all()
     query = request.GET.get("q")
     if query:
         queryset_list = queryset_list.filter(
@@ -94,9 +98,10 @@ def posts_list(request, id=None):
             Q(user__first_name__icontains=query) |
             Q(user__last_name__icontains=query)
         ).distinct()
-    paginator = Paginator(queryset_list, 10)
+    paginator = Paginator(queryset_list, 5)
     page_request_var = "page"
     page = request.GET.get(page_request_var)
+
     try:
         queryset = paginator.page(page)
     except PageNotAnInteger:
@@ -108,6 +113,8 @@ def posts_list(request, id=None):
         "title": "Django Blog",
         "page_request_var": page_request_var,
         "today": today,
+        "title_list": title_list
+
     }
     return render(request, "post_list.html", context)
 
@@ -143,7 +150,30 @@ def posts_delete(request, slug=None):
     return redirect("posts:list")
 
 
-# def listing(request):
-#     contact_list = Contact.objects.all()
+def about(request):
+    # messages.success(request, "Contact Me : +91-7006777505")
+    return render(request, "about.html")
 
-#     return render(request, 'list.html', {'page_obj': page_obj})
+
+def contact(request):
+    messages.success(request, "Contact Me : +91-7006777505")
+    return render(request, "about.html")
+
+
+def get_user_profile(request):
+    instance = User.objects.get(pk=request.user.id)
+    form = ProfileForm(request.POST or None,
+                       request.FILES or None, instance=instance)
+    if form.is_valid():
+        data = form.save(commit=False)
+        data.user = request.user
+        data.save()
+        messages.success(request, "Successfully Updated",
+                         extra_tags='html_safe')
+        return HttpResponseRedirect('/profile/')
+    context = {
+        "title": "Update Profile",
+        "form": form,
+        "instance": instance,
+    }
+    return render(request, "form.html", context)
