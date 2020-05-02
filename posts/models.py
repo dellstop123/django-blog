@@ -107,3 +107,5 @@ class User(models.Model):
     email = models.EmailField()
     first_name = models.CharField(max_length=120)
     last_name = models.CharField(max_length=120)
+    isStaff = models.BooleanField()
+    # password = models.CharField(max_length=120)

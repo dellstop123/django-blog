@@ -3,7 +3,7 @@ import ssl
 import os
 
 
-def mail(reciever_email):
+def mail(reciever_email, message):
     port = 465
 
     password = os.environ.get('password')
@@ -14,7 +14,5 @@ def mail(reciever_email):
     server.login(email, password)
 
     sender_email = email
-    SUBJECT = "New Django Blog Developed by Guneet Singh !"
-    TEXT = "Hi! Welcome to Django Blog"
-    message = 'Subject: {}\n\n{}'.format(SUBJECT, TEXT)
+
     server.sendmail(sender_email, reciever_email, message)
