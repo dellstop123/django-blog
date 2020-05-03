@@ -51,11 +51,36 @@ INSTALLED_APPS = [
     'crispy_forms',
     'markdown_deux',
     'pagedown',
+    'adcode',
+    'social_django',
+
 
     # local apps
     'comment',
-    'posts'
+    'posts',
+
 ]
+
+# oauth-tokens settings
+OAUTH_TOKENS_HISTORY = True  # to keep in DB expired access tokens
+OAUTH_TOKENS_FACEBOOK_CLIENT_ID = ''  # application ID
+OAUTH_TOKENS_FACEBOOK_CLIENT_SECRET = ''  # application secret key
+OAUTH_TOKENS_FACEBOOK_SCOPE = ['offline_access']  # application scopes
+OAUTH_TOKENS_FACEBOOK_USERNAME = ''  # user login
+OAUTH_TOKENS_FACEBOOK_PASSWORD = ''  # user password
+
+
+TEMPLATE_CONTEXT_PROCESSORS = (
+    # Other context processors would go here
+    'adcode.context_processors.current_placements',
+)
+
+# Default setting (not required in settings.py)
+ADCODE_PLACEHOLDER_TEMPLATE = 'http://placehold.it/{width}x{height}'
+
+# Use placekitten instead
+ADCODE_PLACEHOLDER_TEMPLATE = 'http://placekitten.com/{width}/{height}'
+
 
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
 
@@ -68,6 +93,7 @@ MIDDLEWARE_CLASSES = [
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'social_django.middleware.SocialAuthExceptionMiddleware',
 ]
 LOGIN_URL = "/login/"
 ROOT_URLCONF = 'trydjango19.urls'
@@ -83,6 +109,9 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+
+                'social_django.context_processors.backends',  # <--
+                'social_django.context_processors.login_redirect',
             ],
         },
     },
@@ -90,6 +119,26 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'trydjango19.wsgi.application'
 
+AUTHENTICATION_BACKENDS = (
+    'social_core.backends.github.GithubOAuth2',
+    'social_core.backends.twitter.TwitterOAuth',
+    'social_core.backends.facebook.FacebookOAuth2',
+
+    'django.contrib.auth.backends.ModelBackend',
+)
+
+SOCIAL_AUTH_GITHUB_KEY = '07ba0c07ae435f7fcae1'
+SOCIAL_AUTH_GITHUB_SECRET = 'ed3eba4181ceee538dca6465589b128e7dc3ffff'
+
+# SOCIAL_AUTH_TWITTER_KEY = 'cChZNFj6T5R0TigYB9yd1w'
+# SOCIAL_AUTH_TWITTER_SECRET = 'veNRnAWe6inFuo8o2u8SLLZLjolYDmDP7SzL0YfYI'
+
+SOCIAL_AUTH_FACEBOOK_KEY = '250301186328137'  # App ID
+SOCIAL_AUTH_FACEBOOK_SECRET = '4e4b269f424cdf871fb00d03a5056286'  # App Secret
+
+SOCIAL_AUTH_LOGIN_ERROR_URL = '/settings/'
+SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/settings/'
+SOCIAL_AUTH_RAISE_EXCEPTIONS = False
 
 # Database
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases

@@ -4,9 +4,9 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.contenttypes.models import ContentType
 from django.http import HttpResponseRedirect, Http404, HttpResponse
 from django.shortcuts import render, get_object_or_404
-
 from .forms import CommentForm
 from .models import Comment
+from posts.models import Comment
 
 
 @login_required  # (login_url='/login/') #LOGIN_URL = '/login/'
@@ -84,4 +84,17 @@ def comment_thread(request, id):
         "comment": obj,
         "form": form,
     }
+    recent_comments(request)
     return render(request, "comment_thread.html", context)
+
+
+def recent_comments(request):
+    if request.user.is_staff or request.user.is_superuser or request.user.is_authenticated:
+        recent = Comment.objects.all()
+        print(recent)
+        context = {
+            "comment": "Comments",
+            "comment_list": recent,
+
+        }
+        return render(request, "post_list.html", context)

@@ -20,6 +20,26 @@
         value="{{ title }}"
       />
     </form>
+    <br />
+    {% if not request.path == '/profile/' %}
+    <div style="text-align: center;">
+      <p><strong>-- OR --</strong></p>
+      <a
+        id="github-button"
+        class="btn btn-block btn-social btn-github"
+        href="{% url 'social:begin' 'github' %}"
+      >
+        <span class="fa fa-github"></span> Signin with Github
+      </a>
+      <!-- <a href="{% url 'social:begin' 'twitter' %}">Login with Twitter</a><br /> -->
+      <a
+        href="{% url 'social:begin' 'facebook' %}"
+        class="btn btn-block btn-social btn-facebook"
+      >
+        <span class="fa fa-facebook"></span> Signin with Facebook
+      </a>
+    </div>
+    {% endif %}
   </class>
 </div>
 {% endblock content %}

@@ -1,10 +1,10 @@
-.sidenav {
+.rightnav {
   height: 100%;
   width: 340px;
   position: fixed;
-  z-index: 1;
+  z-index: auto;
   top: 37;
-  left: 0;
+  right: 0;
   background-color: whitesmoke;
   font-family: "Times New Roman", Times, serif;
   overflow-y: scroll;
@@ -13,23 +13,23 @@
   word-wrap: break-word;
 }
 /* Hide scrollbar for Chrome, Safari and Opera */
-.sidenav::-webkit-scrollbar {
+.rightnav::-webkit-scrollbar {
   display: none;
 }
 
 /* Hide scrollbar for IE and Edge */
-.sidenav {
+.rightnav {
   -ms-overflow-style: none;
 }
-.sidenav a {
+.rightnav a {
   padding: 6px 8px 6px 16px;
   text-decoration: none;
-  font-size: 18px;
+  font-size: 25px;
   color: skyblue;
   display: block;
 }
 
-.sidenav a:hover {
+.rightnav a:hover {
   color: black;
 }
 
@@ -40,7 +40,7 @@
 
 .title {
   font-family: "Times New Roman", Times, serif;
-  /* font-size: 20; */
+  font-size: 30;
   text-align: center;
   padding-left: 30%;
   display: inline-block;

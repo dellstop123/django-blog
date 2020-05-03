@@ -1,0 +1,41 @@
+{% load staticfiles %} {% load adcode_tags %}{% block content %}
+<!--  -->
+{% if debug %}
+<img
+  alt="{{ placement }}"
+  title="{{ placement }}"
+  src="{{ placement.placeholder }}"
+/>
+{% else %}
+<!-- Here you would put the actual ad code needed -->
+
+<link rel="stylesheet" href='{% static "css/rightnav.css" %}' />
+<script
+  async
+  src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
+></script>
+<!-- Homepage Leaderboard -->
+
+<div class="rightnav">
+  <ins
+    class="adsbygoogle"
+    style="display: inline-block; width: 728px; height: 90px;"
+    data-ad-client="ca-pub-1234567890123456"
+    data-ad-slot="1234567890"
+  ></ins>
+  <label class="title">
+    {{ comment }}
+  </label>
+  <hr />
+  {% for list in comment_list %}
+
+  <a href="{{ list.get_absolute_url }}">
+    {{list.Comment|linebreaks|truncatechars:50 }}
+  </a>
+  <hr />
+  {% endfor %}
+  <script>
+    (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+</div>
+{% endif %} {% endblock %}

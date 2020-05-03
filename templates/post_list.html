@@ -1,17 +1,26 @@
 {% extends "base.html" %}{% load crispy_forms_tags %} {% block content %}
 <!--  -->
 
-<div class="col-sm-6 col-sm-offset-3">
-  <h1 class="col-sm-6 col-sm-offset-3">{{ title }}</h1>
+{% include "sidenav.html" %}
+
+<div class="col-sm-6 col-sm-offset-3" style="background-color: bisque;">
+  <h1 class="col-sm-6 col-sm-offset-3" style="text-decoration: darkgreen;">
+    {{ title }}
+  </h1>
 
   <form method="GET" action="" class="col-sm-6 col-sm-offset-3">
     <input
+      class="btn btn-block btn-social btn-search"
       type="text"
       name="q"
       placeholder="Search posts"
       value="{{ request.GET.q }}"
     />
-    <input type="submit" value="Search" />
+    <input
+      type="submit"
+      value="Search"
+      class="btn btn-block btn-social btn-search"
+    />
   </form>
   {% for obj in object_list %}
   <div class="row">
@@ -79,4 +88,8 @@
     </span>
   </div>
 </div>
-{% include "sidenav.html" %} {% endblock content %}
+<div>
+  {% include "rightnav.html" %}
+  <!--  -->
+</div>
+{% endblock content %}

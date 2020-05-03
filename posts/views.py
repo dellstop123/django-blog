@@ -13,6 +13,7 @@ from accounts.views import login_view, logout_view
 from comment.forms import CommentForm
 from comment.models import Comment
 
+
 # Create your views here.
 
 
@@ -115,6 +116,7 @@ def posts_list(request, id=None):
         "title_list": title_list,
 
     }
+    # recent_comments(request)
     return render(request, "post_list.html", context)
 
 
@@ -178,22 +180,22 @@ def get_user_profile(request):
     return render(request, "form.html", context)
 
 
-def change_pwd(request):
-    instance = User.objects.get(pk=request.user.id)
-    form = PasswordForm(request.POST or None,
-                        request.FILES or None, instance=instance)
-    print(instance)
-    if form.is_valid():
-        data = form.save(commit=False)
-        data.user = request.user
-        print(data)
-        data.save()
-        messages.success(request, "Password Changed Successfully",
-                         extra_tags='html_safe')
-        return logout_view(request)
-    context = {
-        "title": "Change Password",
-        "form": form,
-        "instance": instance,
-    }
-    return render(request, "form.html", context)
+# def change_pwd(request):
+#     instance = User.objects.get(pk=request.user.id)
+#     form = PasswordForm(request.POST or None,
+#                         request.FILES or None, instance=instance)
+#     print(instance)
+#     if form.is_valid():
+#         data = form.save(commit=False)
+#         data.user = request.user
+#         print(data)
+#         data.save()
+#         messages.success(request, "Password Changed Successfully",
+#                          extra_tags='html_safe')
+#         return logout_view(request)
+#     context = {
+#         "title": "Change Password",
+#         "form": form,
+#         "instance": instance,
+#     }
+#     return render(request, "form.html", context)

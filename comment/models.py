@@ -20,6 +20,10 @@ class CommentManager(models.Manager):
             content_type=content_type, object_id=obj_id).filter(parent=None)
         return qs
 
+    def active(self, *args, **kwargs):
+        # overriding all() of Post method
+        return super(CommentManager, self).filter(content_type=True)
+
 
 class Comment(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, default=1)

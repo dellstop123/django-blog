@@ -6,7 +6,8 @@ from django.contrib.auth.models import User
 
 
 class PostForm(forms.ModelForm):
-    content = forms.CharField(widget=PagedownWidget(show_preview=False))
+    content = forms.CharField(
+        widget=PagedownWidget(attrs={"show_preview": False}))
     publish = forms.DateField(widget=forms.SelectDateWidget)
 
     class Meta:
