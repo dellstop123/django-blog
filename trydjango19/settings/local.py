@@ -70,10 +70,10 @@ OAUTH_TOKENS_FACEBOOK_USERNAME = ''  # user login
 OAUTH_TOKENS_FACEBOOK_PASSWORD = ''  # user password
 
 
-TEMPLATE_CONTEXT_PROCESSORS = (
-    # Other context processors would go here
-    'adcode.context_processors.current_placements',
-)
+# TEMPLATE_CONTEXT_PROCESSORS = (
+#     # Other context processors would go here
+#     'adcode.context_processors.current_placements',
+# )
 
 # Default setting (not required in settings.py)
 ADCODE_PLACEHOLDER_TEMPLATE = 'http://placehold.it/{width}x{height}'
@@ -109,7 +109,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-
+                'django.template.context_processors.media',
                 'social_django.context_processors.backends',  # <--
                 'social_django.context_processors.login_redirect',
             ],
@@ -128,7 +128,7 @@ AUTHENTICATION_BACKENDS = (
 )
 
 SOCIAL_AUTH_GITHUB_KEY = '07ba0c07ae435f7fcae1'
-SOCIAL_AUTH_GITHUB_SECRET = 'ed3eba4181ceee538dca6465589b128e7dc3ffff'
+SOCIAL_AUTH_GITHUB_SECRET = '289f3d501368724e300e3a06d85fda0d0360d9d5'
 
 # SOCIAL_AUTH_TWITTER_KEY = 'cChZNFj6T5R0TigYB9yd1w'
 # SOCIAL_AUTH_TWITTER_SECRET = 'veNRnAWe6inFuo8o2u8SLLZLjolYDmDP7SzL0YfYI'

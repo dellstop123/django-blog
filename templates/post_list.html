@@ -4,7 +4,7 @@
 {% include "sidenav.html" %}
 
 <div class="col-sm-6 col-sm-offset-3" style="background-color: bisque;">
-  <h1 class="col-sm-6 col-sm-offset-3" style="text-decoration: darkgreen;">
+  <h1 class="col-sm-6 col-sm-offset-3">
     {{ title }}
   </h1>
 
@@ -35,6 +35,7 @@
           {% endif %} {% if obj.publish > today %}
           <h3>Staff Only: Future Post</h3>
           {% endif %}
+
           <h3>
             <a href="{{ obj.get_absolute_url }}" style="word-wrap: break-word;"
               >{{ obj.title|linebreaks|truncatechars:120 }}</a
@@ -43,6 +44,7 @@
           </h3>
           {% if obj.user.get_full_name %}
           <p>Author: {{ obj.user.get_full_name }}</p>
+
           {% endif %}
           <p class="post-detail-item">
             {{ obj.content|linebreaks|truncatechars:200 }}

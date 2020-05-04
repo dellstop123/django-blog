@@ -34,7 +34,35 @@
 <p><div class="fb-like" data-href="{{ request.build_absolute_uri }}" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true"></div>
 <hr/>
 </p>
+<p>
+    <strong id="like_count">{{ instance.likes }}</strong> people like this category
 
+{% if user.is_authenticated %}
+    <button id="likes" data-post_id="{{instance.id}}"  class="btn btn-primary" type="button">
+    {% if liked %}
+        <span class="like_span glyphicon glyphicon-thumbs-down"></span>
+        Unlike
+        </button>
+    {% else %}
+        <span class="like_span glyphicon glyphicon-thumbs-up"></span>
+        Like
+        </button>
+    {% endif %}
+{% endif %}
+</p>
+<!-- <a href="#" onClick="document.getElementById('likebutton').submit()">Like This Post</a> {{instance.likepost}}   |   
+<a href="#" onClick="document.getElementById('dislikebutton').submit()">Dislike This Post</a> {{instance.dislikes}}
+
+
+<form id="likebutton" method="POST" action="{{ request.build_absolute_uri }}{{instance.id}}/preference/1/">
+{% csrf_token %}
+<input type="hidden">
+</form>
+
+<form id="dislikebutton" method="POST" action="{{ request.build_absolute_uri }}{{instance.id}}/preference/2/">
+{% csrf_token %}
+<input type="hidden">
+</form> -->
 
 
 <!-- <p>
@@ -108,6 +136,16 @@ Linkedin
 </div>
 </div>
 </div>
-
+<script>
+    $('#likes').click(function(){
+    $('.like_span').toggleClass('glyphicon-thumbs-down glyphicon-thumbs-up');
+    var postid;
+    postid= $(this).attr("data-post_id");
+    $.get('{{ request.build_absolute_uri }}like_post/', {post_id: postid, liked:$('.like_span').hasClass('glyphicon-thumbs-up')}, function(data){
+               $('#like_count').html(data);
+               $('#likes').hide();
+    });
+});
+</script>
 
 {% endblock content %}

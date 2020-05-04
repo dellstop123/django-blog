@@ -1,6 +1,7 @@
 .body {
   background-color: #6e8997;
-  overflow: hidden;
+  overflow-y: hidden;
+  /* padding-right: 15px; */
 }
 
 ​ .h1 {
@@ -26,6 +27,8 @@
 
 .container img:hover + .dropdown {
   display: block;
+  top: 37;
+  padding-top: 20px;
 }
 /* .container {
   left: 0;

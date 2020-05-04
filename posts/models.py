@@ -4,12 +4,13 @@ from django.db import models
 from django.contrib.contenttypes.models import ContentType
 from django.core.urlresolvers import reverse
 # from django.urls import reverse
-# from django.urlresolvers import reverse
 from django.conf import settings
 from django.utils import timezone
+from django.contrib.auth.models import User
 from django.db.models.signals import pre_save
 from django.utils.safestring import mark_safe
-from django.utils.text import slugify
+# from django.utils.text import slugify
+from django.template.defaultfilters import slugify
 # Create your models here.
 from markdown_deux import markdown
 
@@ -46,6 +47,7 @@ class Post(models.Model):
     read_time = models.IntegerField(default=0)
     updated = models.DateTimeField(auto_now=True, auto_now_add=False)
     timestamp = models.DateTimeField(auto_now=False, auto_now_add=True)
+    likes = models.IntegerField(default=0)
 
     objects = PostManager()
 
@@ -54,6 +56,10 @@ class Post(models.Model):
 
     def __str__(self):
         return self.title
+
+    def save(self, *args, **kwargs):
+        self.url = slugify(self.title)
+        super(Post, self).save(*args, **kwargs)
 
     def get_absolute_url(self):
         return reverse("posts:detail", kwargs={"slug": self.slug})
@@ -110,3 +116,16 @@ class User(models.Model):
     last_name = models.CharField(max_length=120)
     isStaff = models.BooleanField()
     # password = models.CharField(max_length=120)
+
+
+class Preference(models.Model):
+    user = models.ForeignKey(User)
+    post = models.ForeignKey(Post)
+    value = models.IntegerField()
+    date = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return str(self.user) + ':' + str(self.post) + ':' + str(self.value)
+
+    class Meta:
+        unique_together = ("user", "post", "value")
