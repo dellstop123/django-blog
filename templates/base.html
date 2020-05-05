@@ -25,7 +25,8 @@
       rel="stylesheet"
       href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"
     />
-
+    <!-- <link rel="stylesheet" href='{% static "js/slider.js" %}' /> -->
+    <!-- <link rel="stylesheet" href='{% static "css/slider.css" %}' /> -->
     <link rel="stylesheet" href='{% static "css/base.css" %}' />
     <link rel="stylesheet" href='{% static "css/modal.css" %}' />
     {% render_section_header %}
@@ -36,6 +37,12 @@
     ></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     {% block head_extra %} {% endblock head_extra %}
     <!--  -->
   </head>
@@ -184,7 +191,7 @@
         <li class="pull-right">
           <a href='{% url "profile" %}'>Profile</a>
         </li>
-
+        <li class="pull-right">Welcome,{{request.user}}</li>
         {% endif %}
       </ol>
       {% block content %}{% endblock content %}

@@ -1,7 +1,7 @@
 from django import forms
 from pagedown.widgets import PagedownWidget
 
-from .models import Post
+from .models import Post, Video, Images
 from django.contrib.auth.models import User
 
 
@@ -9,6 +9,7 @@ class PostForm(forms.ModelForm):
     content = forms.CharField(
         widget=PagedownWidget(attrs={"show_preview": False}))
     publish = forms.DateField(widget=forms.SelectDateWidget)
+    # image = forms.ImageField(label='Image')
 
     class Meta:
         model = Post
@@ -47,3 +48,17 @@ class PasswordForm(forms.ModelForm):
         fields = [
             'password',
         ]
+
+
+class VideoForm(forms.ModelForm):
+    class Meta:
+        model = Video
+        fields = ["name", "videofile"]
+
+
+class ImageForm(forms.ModelForm):
+    image = forms.ImageField(label='Image')
+
+    class Meta:
+        model = Images
+        fields = ['post', 'image', ]

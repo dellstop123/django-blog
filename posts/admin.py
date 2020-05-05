@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Post
+from .models import Post, Images
 # Register your models here.
 
 
@@ -12,6 +12,12 @@ class PostModelAdmin(admin.ModelAdmin):
 
     class Meta:
         model = Post
+        # ordering = ["-timestamp", "-updated"]
+
+
+class ImagesAdmin(admin.ModelAdmin):
+    list_display_image = ['post', 'image']
 
 
 admin.site.register(Post, PostModelAdmin)
+admin.site.register(Images, ImagesAdmin)

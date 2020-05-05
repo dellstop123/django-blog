@@ -129,3 +129,23 @@ class Preference(models.Model):
 
     class Meta:
         unique_together = ("user", "post", "value")
+
+
+class Images(models.Model):
+    post = models.ForeignKey(Post, null=True)
+    image = models.ImageField(upload_to=upload_location,
+                              null=True, blank=True, width_field="width_field", height_field="height_field")
+    height_field = models.IntegerField(default=0)
+    width_field = models.IntegerField(default=0)
+
+    def __str__(self):
+        return self.post.title
+
+
+class Video(models.Model):
+    name = models.CharField(max_length=500)
+    videofile = models.FileField(
+        upload_to='videos/', null=True, verbose_name="")
+
+    def __str__(self):
+        return str(self.videofile)

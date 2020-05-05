@@ -121,6 +121,7 @@ def setting(request):
         'can_disconnect': can_disconnect
     })
 
+
 @login_required
 def password(request):
     if request.user.has_usable_password():
@@ -133,7 +134,8 @@ def password(request):
         if form.is_valid():
             form.save()
             update_session_auth_hash(request, form.user)
-            messages.success(request, 'Your password was successfully updated!')
+            messages.success(
+                request, 'Your password was successfully updated!')
             return redirect('password')
         else:
             messages.error(request, 'Please correct the error below.')

@@ -3,17 +3,20 @@ from django.contrib import messages
 from django.utils import timezone
 from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import Post, User, Preference
+from .models import Post, User, Preference, Images
+from .admin import PostModelAdmin
+from django.contrib import admin
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib.contenttypes.models import ContentType
-from .forms import PostForm, ProfileForm, PasswordForm
+from .forms import PostForm, ProfileForm, PasswordForm, VideoForm, ImageForm
 from django.db.models import Q
 from accounts.views import login_view, logout_view
 from comment.forms import CommentForm
 from comment.models import Comment
-
+from django.forms import modelformset_factory
+from .models import Video
 
 # Create your views here.
 
@@ -23,16 +26,45 @@ def posts_create(request):
         raise Http404
     if not request.user.is_authenticated():
         raise Http404
-    form = PostForm(request.POST or None, request.FILES or None)
-    if form.is_valid():
-        instance = form.save(commit=False)
-        instance.user = request.user
-        instance.save()
-        # message success
-        messages.success(request, "Successfully Created")
-        return HttpResponseRedirect(instance.get_absolute_url())
+    # Imageformset = modelformset_factory(
+    #     Images, fields=('post', 'image',), extra=1)
+    if request.method == 'POST':
+        imageForm = ImageForm(request.POST or None, request.FILES or None)
+        form = PostForm(request.POST or None, request.FILES or None)
+        # formset = Imageformset(request.POST or None, request.FILES or None)
+        if form.is_valid() and imageForm.is_valid():
+            instance = form.save(commit=False)
+            image = imageForm.save(commit=False)
+            instance.user = request.user
+            image.user = request.user
+            instance.save()
+            image.save()
+            messages.success(request, "Successfully Created")
+            return redirect("post_list.html")
+            # return HttpResponseRedirect(instance.get_absolute_url())
+            # for f in formset:
+            #     try:
+            #         photo = Images(
+            #             post=instance, image=f.cleaned_data['image'])
+            #         photo.save()
+            #         messages.success(request, "Successfully Created")
+            #         return HttpResponseRedirect(instance.get_absolute_url())
+            #     except Exception as e:
+            #         break
+            # messages.success(request, "Successfully Created")
+            # return redirect("post_list.html")
+            # message success
+
+    else:
+        form = PostForm()
+        imageForm = ImageForm()
+        # formset = Imageformset(queryset=Images.objects.none())
+        # print(imageForm.count())
     context = {
         "form": form,
+        # "formset": formset,
+        "imageform": imageForm,
+
     }
     return render(request, "post_form.html", context)
 
@@ -40,7 +72,12 @@ def posts_create(request):
 def posts_detail(request, slug=None):
     instance = get_object_or_404(Post, slug=slug)
     post_id = instance.pk
-    print(instance.likes)
+    image = Images.objects.filter(post=post_id)
+    count = Images.objects.filter(post=post_id).count()
+    count1 = Post.objects.filter(image=instance.image).count()
+    total_count = count
+    # print(total_count)
+    # print(instance.likes)
     if instance.publish > timezone.now().date() or instance.draft:
         if not request.user.is_staff or not request.user.is_superuser:
             raise Http404
@@ -88,6 +125,8 @@ def posts_detail(request, slug=None):
         "comments": comments,
         "comment_form": form,
         "liked": liked,
+        "image": image,
+        "count": range(1, total_count),
     }
     return render(request, "post_detail.html", context)
 
@@ -96,6 +135,12 @@ def posts_list(request, id=None):
     today = timezone.now().date()
     queryset_list = Post.objects.active()
     title_list = Post.objects.all()
+    # post_id = request.user.id
+    # image = Images.objects.all()
+    # count = Images.objects.all(post=post_id).count()
+    # count1 = Post.objects.filter(image=title_list.image).count()
+    # total_count = count
+    # print(title_list)
     if request.user.is_staff or request.user.is_superuser:
         queryset_list = Post.objects.all()
     query = request.GET.get("q")
@@ -268,3 +313,20 @@ def like_post(request):
     post.likes = likes
     post.save()
     return HttpResponse(likes, liked)
+
+
+def showvideo(request):
+
+    lastvideo = Video.objects.all()
+
+    videofile = lastvideo.videofile
+
+    form = VideoForm(request.POST or None, request.FILES or None)
+    if form.is_valid():
+        form.save()
+
+    context = {'videofile': videofile,
+               'form': form
+               }
+
+    return render(request, 'post_detail.html', context)
