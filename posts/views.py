@@ -21,27 +21,44 @@ from .models import Video
 # Create your views here.
 
 
+def post_image(request, slug=None):
+    imageForm = ImageForm(request.POST or None, request.FILES or None)
+    # imageForm = get_object_or_404(Images, slug=slug)
+    if imageForm.is_valid():
+        image = imageForm.save(commit=False)
+        image.user = request.user
+        image.save()
+        messages.success(request, "Successfully Created")
+        return redirect("posts:list")
+        # return HttpResponseRedirect(image.get_absolute_url())
+    else:
+        imageForm = ImageForm()
+    context = {
+        "imageform": imageForm,
+
+    }
+    return render(request, "image/post_image.html", context)
+
+
 def posts_create(request):
-    if not request.user.is_staff or not request.user.is_superuser:
-        raise Http404
     if not request.user.is_authenticated():
         raise Http404
     # Imageformset = modelformset_factory(
     #     Images, fields=('post', 'image',), extra=1)
     if request.method == 'POST':
-        imageForm = ImageForm(request.POST or None, request.FILES or None)
+
         form = PostForm(request.POST or None, request.FILES or None)
         # formset = Imageformset(request.POST or None, request.FILES or None)
-        if form.is_valid() and imageForm.is_valid():
+        if form.is_valid():
             instance = form.save(commit=False)
-            image = imageForm.save(commit=False)
+
             instance.user = request.user
-            image.user = request.user
+
             instance.save()
-            image.save()
+            value = True
             messages.success(request, "Successfully Created")
-            return redirect("post_list.html")
-            # return HttpResponseRedirect(instance.get_absolute_url())
+            # return redirect("post_list.html")
+            return HttpResponseRedirect(instance.get_absolute_url())
             # for f in formset:
             #     try:
             #         photo = Images(
@@ -57,12 +74,13 @@ def posts_create(request):
 
     else:
         form = PostForm()
+        value = False
         imageForm = ImageForm()
         # formset = Imageformset(queryset=Images.objects.none())
         # print(imageForm.count())
     context = {
         "form": form,
-        # "formset": formset,
+        "value": value,
         "imageform": imageForm,
 
     }
@@ -75,9 +93,9 @@ def posts_detail(request, slug=None):
     image = Images.objects.filter(post=post_id)
     count = Images.objects.filter(post=post_id).count()
     count1 = Post.objects.filter(image=instance.image).count()
-    total_count = count
-    # print(total_count)
-    # print(instance.likes)
+    total_count = count + 1
+    print(total_count)
+    print(instance.likes)
     if instance.publish > timezone.now().date() or instance.draft:
         if not request.user.is_staff or not request.user.is_superuser:
             raise Http404
@@ -126,7 +144,7 @@ def posts_detail(request, slug=None):
         "comment_form": form,
         "liked": liked,
         "image": image,
-        "count": range(1, total_count),
+        "count": range(0, total_count),
     }
     return render(request, "post_detail.html", context)
 
@@ -135,12 +153,15 @@ def posts_list(request, id=None):
     today = timezone.now().date()
     queryset_list = Post.objects.active()
     title_list = Post.objects.all()
-    # post_id = request.user.id
-    # image = Images.objects.all()
-    # count = Images.objects.all(post=post_id).count()
+    image = Images.objects.select_related('post')
+    count1 = Images.objects.select_related('post').count()
+    # count = Images.objects.get(post=queryset_list)
     # count1 = Post.objects.filter(image=title_list.image).count()
-    # total_count = count
-    # print(title_list)
+    total_count = count1 + 1
+    print("<------------->")
+    print(total_count)
+    print("<------------->")
+    print(str(image.query))
     if request.user.is_staff or request.user.is_superuser:
         queryset_list = Post.objects.all()
     query = request.GET.get("q")
@@ -167,14 +188,16 @@ def posts_list(request, id=None):
         "page_request_var": page_request_var,
         "today": today,
         "title_list": title_list,
+        "image": image,
+        "count": range(0, total_count),
 
     }
     return render(request, "post_list.html", context)
 
 
 def posts_update(request, slug=None):
-    if not request.user.is_staff or not request.user.is_superuser:
-        raise Http404
+    # if not request.user.is_staff or not request.user.is_superuser:
+    #     raise Http404
     instance = get_object_or_404(Post, slug=slug)
     form = PostForm(request.POST or None,
                     request.FILES or None, instance=instance)
@@ -195,8 +218,8 @@ def posts_update(request, slug=None):
 
 
 def posts_delete(request, slug=None):
-    if not request.user.is_staff or not request.user.is_superuser:
-        raise Http404
+    # if not request.user.is_staff or not request.user.is_superuser:
+    #     raise Http404
     instance = get_object_or_404(Post, slug=slug)
     instance.delete()
     messages.success(request, "Successfully Deleted")

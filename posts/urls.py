@@ -9,7 +9,8 @@ from .views import (
     posts_delete,
     about,
     postpreference,
-    like_post
+    like_post,
+    post_image
 )
 
 urlpatterns = [
@@ -21,4 +22,5 @@ urlpatterns = [
     url(r'like_post/$', like_post, name='like_post'),
     url(r'^(?P<postid>\d+)/preference/(?P<userpreference>\d+)/$',
         postpreference, name='postpreference'),
+    url(r'^(?P<slug>[\w-]+)/mul-images/$', post_image, name='mul-images'),
 ]

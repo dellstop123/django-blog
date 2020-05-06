@@ -2,8 +2,10 @@ from __future__ import unicode_literals
 from django.db import models
 
 from django.contrib.contenttypes.models import ContentType
-from django.core.urlresolvers import reverse
-# from django.urls import reverse
+try:
+    from django.urls import reverse
+except ImportError:
+    from django.core.urlresolvers import reverse
 from django.conf import settings
 from django.utils import timezone
 from django.contrib.auth.models import User
@@ -33,7 +35,7 @@ def upload_location(instance, filename):
 
 class Post(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL,
-                             default=1)
+                             default=1,)
     title = models.CharField(max_length=120)
     slug = models.SlugField(unique=True)
     image = models.ImageField(upload_to=upload_location,
@@ -119,8 +121,8 @@ class User(models.Model):
 
 
 class Preference(models.Model):
-    user = models.ForeignKey(User)
-    post = models.ForeignKey(Post)
+    user = models.ForeignKey(User, )
+    post = models.ForeignKey(Post,)
     value = models.IntegerField()
     date = models.DateTimeField(auto_now=True)
 
@@ -132,7 +134,7 @@ class Preference(models.Model):
 
 
 class Images(models.Model):
-    post = models.ForeignKey(Post, null=True)
+    post = models.ForeignKey(Post,)
     image = models.ImageField(upload_to=upload_location,
                               null=True, blank=True, width_field="width_field", height_field="height_field")
     height_field = models.IntegerField(default=0)

@@ -20,12 +20,14 @@
     <div id="myCarousel" class="carousel slide" data-ride="carousel">
         <!-- Indicators -->
         
+        
     <ol class="carousel-indicators">
         {% for c in count %}
-        <li data-target="#myCarousel" data-slide-to="0" class="active" ></li>       
-        <li data-target="#myCarousel" data-slide-to='{{c}}' ></li>
+        <!-- <li data-target="#myCarousel" data-slide-to="0" class="active" ></li>      -->
+        <li data-target="#myCarousel" data-slide-to="{{c}}"  ></li>       
         {% endfor %}
       </ol>
+     
       
     {% if instance.image %}  
      <!-- Wrapper for slides -->

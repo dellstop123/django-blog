@@ -30,11 +30,7 @@
     <link rel="stylesheet" href='{% static "css/base.css" %}' />
     <link rel="stylesheet" href='{% static "css/modal.css" %}' />
     {% render_section_header %}
-    <script
-      data-ad-client="ca-pub-4547075187895871"
-      async
-      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
-    ></script>
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link
@@ -47,48 +43,10 @@
     <!--  -->
   </head>
   <body>
-    <!-- Modal HTML -->
-    <div id="myModal" class="modal fade">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button
-              type="button"
-              class="close"
-              data-dismiss="modal"
-              aria-hidden="true"
-            >
-              &times;
-            </button>
-            <h4 class="modal-title">Confirmation</h4>
-          </div>
-          <div class="modal-body">
-            <p>
-              Do you want to save changes you made to document before closing?
-            </p>
-            <p class="text-warning">
-              <small>If you don't save, your changes will be lost.</small>
-            </p>
-            <p class="text-info">
-              <small
-                ><strong>Note:</strong> Press Tab key on the keyboard to enter
-                inside the modal window after that press the Esc key. By default
-                keyboard option is true that means modal hide on the press of
-                escape key.</small
-              >
-            </p>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">
-              Close
-            </button>
-            <button type="button" class="btn btn-primary">Save changes</button>
-          </div>
-        </div>
-      </div>
-    </div>
+    
+    
 
-    {% if section and placements and not debug %}
+    <!-- {% if section and placements and not debug %}
     <script>
       var googletag = googletag || {};
       googletag.cmd = googletag.cmd || [];
@@ -119,7 +77,7 @@
         googletag.enableServices();
       });
     </script>
-    {% endif %}
+    {% endif %} -->
     <!-- <script
       async
       src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
@@ -152,8 +110,8 @@
     <div class="container" id="id">
       <ol class="breadcrumb">
         <li><a href='{% url "posts:list" %}'>Home</a></li>
-        {% block post_detail_link %} {% endblock %}
-        <!-- <div></div> -->
+        
+
         {% if not request.user.is_authenticated %}
         <li class="pull-right">
           <a href='{% url "register" %}'>Register</a>
@@ -167,16 +125,24 @@
         </li>
         {% endif %}
         <!--  -->
-        {% if request.user.is_staff %}
+        {% if request.user.is_authenticated %}
         <!--  -->
         {% if instance and not request.path == '/profile/' %}
+        <!--  -->
+        {% if not '/edit/' in request.path  %}
+        
         <li class="pull-center">
-          <a href=" {{ request.path }}edit ">Edit Blog</a>
+          <a  href="{{ request.path }}edit">Edit Blog</a>
         </li>
-
         <li class="pull-center">
-          <a href="{{ request.path }}delete">Delete Blog</a>
+          <a  href="{{ request.path }}mul-images">Add Images</a>
         </li>
+        <li class="pull-center">
+          <a  href="{{ request.path }}delete">Delete Blog</a>
+        </li>
+       
+        {% endif %}
+        <!--  -->
         {% endif %}{% endif %}
 
         <li class="pull-right">
@@ -261,15 +227,6 @@
       });
     </script>
 
-    <script>
-      $(document).ready(function () {
-        $(".id").click(function () {
-          $("#myModal").modal({
-            backdrop: "static",
-          });
-        });
-      });
-    </script>
     {% if request.user.is_authenticated %}
     <!--  -->
     {% include "footer.html" %}
