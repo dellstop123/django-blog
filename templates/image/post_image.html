@@ -8,7 +8,8 @@
   </h1>
   <form method="POST" action="" enctype="multipart/form-data">
     {% csrf_token %} {{ imageform|crispy }}
-    <input type="submit" class="btn btn-primary" value="Create Post" />
+    <input type="submit" class="btn btn-primary" value="Add Image" />
   </form>
+
 </div>
 {% endblock content%}

@@ -1,13 +1,12 @@
 {% extends "base.html" %}{% load crispy_forms_tags %} {% block content %}
 <!--  -->
-
+<div>
 {% include "sidenav.html" %}
-
-<div class="col-sm-6 col-sm-offset-3" style="background-color: bisque;">
+</div>
+<div class="col-sm-6 col-sm-offset-3" style="background-color:steelblue;">
   <h1 class="col-sm-6 col-sm-offset-3">
     {{ title }}
   </h1>
-
   <form method="GET" action="" class="col-sm-6 col-sm-offset-3">
     <input
       class="btn btn-block btn-social btn-search"
@@ -22,60 +21,16 @@
       class="btn btn-block btn-social btn-search"
     />
   </form>
+
   {% for obj in object_list %}
+ 
   <div class="row">
     <div class="col-sm-12">
       <div class="thumbnail">
-        <!-- New IMplement -->
-        <div id="myCarousel" class="carousel slide" data-ride="carousel">
-          <!-- Indicators -->
-          <ol class="carousel-indicators">
-            {% for c in count %}
-            <!-- <li data-target="#myCarousel" data-slide-to="0" class="active"></li> -->
-            <li data-target="#myCarousel" data-slide-to="{{c}}"></li>
-            {% endfor %}
-          </ol>
-          {% if obj.image %}
-          <!-- Wrapper for slides -->
-          <div
-            class="carousel-inner"
-            style="width: 100%; height: 500px !important;"
-          >
-            <div class="item active">
-              <img
-                src="{{ obj.image.url }}"
-                class="img-responsive"
-                width="100%"
-              />
-            </div>
 
-            {% for p in image %}
-            <div class="item">
-              <img src="{{ p.image.url }}" class="img-responsive" width="100%" />
-            </div>
-            {% endfor %}
-          </div>
-          <!-- Left and right controls -->
-          <a class="left carousel-control" href="#myCarousel" data-slide="prev">
-            <span class="glyphicon glyphicon-chevron-left"></span>
-            <span class="sr-only">Previous</span>
-          </a>
-          <a
-            class="right carousel-control"
-            href="#myCarousel"
-            data-slide="next"
-          >
-            <span class="glyphicon glyphicon-chevron-right"></span>
-            <span class="sr-only">Next</span>
-          </a>
-        </div>
-        {% endif %}
-
-        <!-- Exit -->
-
-        <!-- {% if obj.image %}
+{% if obj.image %}
         <img src="{{ obj.image.url }}" class="img-responsive" />
-        {% endif %} -->
+        {% endif %}
         <div class="caption">
           {% if obj.draft %}
           <h3>Staff only: Draft</h3>
@@ -110,7 +65,7 @@
     <hr />
   </div>
   {% endfor %}
-
+ 
   <div class="pagination">
     <span class="step-links">
       {% if object_list.has_previous %}
@@ -137,40 +92,6 @@
     </span>
   </div>
 
-  <!-- New Pagination -->
-
-  <!-- <nav aria-label="...">
-    <ul class="pagination">
-      <li class="page-item disabled">
-        <span class="page-link">Previous</span>
-      </li>
-      {% if object_list.has_previous %}
-      <li class="page-item">
-        <a
-          class="page-link"
-          href="?{{ page_request_var }}={{ object_list.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}"
-        ></a>
-      </li>
-      {% endif %}
-      <li class="page-item active">
-        <span class="page-link">
-          {{ object_list.number }} of {{ object_list.paginator.num_pages }}
-          <span class="sr-only">(current)</span>
-        </span>
-      </li>
-      {% if object_list.has_next %}
-      <li class="page-item">
-        <a
-          class="page-link"
-          href="?{{ page_request_var }}={{ object_list.next_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}"
-        ></a>
-      </li>
-      <li class="page-item">
-        <a class="page-link" href="#">Next</a>
-      </li>
-      {% endif %}
-    </ul>
-  </nav> -->
 </div>
 <div>
   {% include "rightnav.html" %}

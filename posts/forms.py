@@ -1,8 +1,10 @@
 from django import forms
 from pagedown.widgets import PagedownWidget
-
+from string import Template
+from django.utils.safestring import mark_safe
 from .models import Post, Video, Images
 from django.contrib.auth.models import User
+from django.forms import widgets
 
 
 class PostForm(forms.ModelForm):
@@ -65,3 +67,9 @@ class ImageForm(forms.ModelForm):
             'post',
             'image',
         ]
+
+
+class PictureWidget(forms.widgets.Widget):
+    def render(self, name, value, attrs=None, **kwargs):
+        html = Template("""<img src="$link"/>""")
+        return mark_safe(html.substitute(link=value))

@@ -1,0 +1,33 @@
+{% extends "base.html" %} {% load crispy_forms_tags %} {% block content %}
+
+<div>
+  <div class="col-sm-6 col-sm-offset-3">
+    <h1>Delete Images</h1>
+
+    <hr />
+
+    <form method="POST" action="" enctype="multipart/form-data">
+      {% csrf_token %} 
+      {% if image %}
+      {% for p in image %}
+    <div class="item">
+    <a href="{{ request.path }}delete-image/{{ p.id }}/">
+      <img src='{{ p.image.url }}' id="del" class='d-block w-100' width="50%" /> 
+    </a>
+     </div>
+    {% endfor %}
+    {% else %}
+        
+    <div class="item">
+       <p> No Images</p>
+       </div>     
+
+
+   {% endif %}
+
+   
+    </form>
+    <br />
+  </div>
+</div>
+{% endblock content %}

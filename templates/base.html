@@ -21,6 +21,11 @@
       crossorigin="anonymous"
     />
 
+     <script>
+ 
+    $(".carousel-inner").next().addClass('active');
+     
+</script>
     <link
       rel="stylesheet"
       href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"
@@ -106,8 +111,9 @@
     </script>
 
     {% include "messages_display.html" %}
-
+    
     <div class="container" id="id">
+      
       <ol class="breadcrumb">
         <li><a href='{% url "posts:list" %}'>Home</a></li>
         
@@ -136,6 +142,9 @@
         </li>
         <li class="pull-center">
           <a  href="{{ request.path }}mul-images">Add Images</a>
+        </li>
+        <li class="pull-center">
+          <a  href="{{ request.path }}image">Delete Images</a>
         </li>
         <li class="pull-center">
           <a  href="{{ request.path }}delete">Delete Blog</a>

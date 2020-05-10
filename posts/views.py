@@ -10,13 +10,17 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib.contenttypes.models import ContentType
-from .forms import PostForm, ProfileForm, PasswordForm, VideoForm, ImageForm
+from .forms import PostForm, ProfileForm, PasswordForm, VideoForm, ImageForm, PictureWidget
 from django.db.models import Q
 from accounts.views import login_view, logout_view
 from comment.forms import CommentForm
 from comment.models import Comment
 from django.forms import modelformset_factory
 from .models import Video
+try:
+    from django.urls import reverse
+except ImportError:
+    from django.core.urlresolvers import reverse
 
 # Create your views here.
 
@@ -29,8 +33,8 @@ def post_image(request, slug=None):
         image.user = request.user
         image.save()
         messages.success(request, "Successfully Created")
-        return redirect("posts:list")
-        # return HttpResponseRedirect(image.get_absolute_url())
+        # return redirect("posts:mul-images")
+        return HttpResponseRedirect(request.path)
     else:
         imageForm = ImageForm()
     context = {
@@ -153,15 +157,13 @@ def posts_list(request, id=None):
     today = timezone.now().date()
     queryset_list = Post.objects.active()
     title_list = Post.objects.all()
-    image = Images.objects.select_related('post')
-    count1 = Images.objects.select_related('post').count()
-    # count = Images.objects.get(post=queryset_list)
-    # count1 = Post.objects.filter(image=title_list.image).count()
-    total_count = count1 + 1
+    image = Post.objects.raw(
+        """select image,id from posts_post union select image,post_id from posts_images;""")
+    count1 = len(list(image))
+    img = Images.objects.select_related('post')
+    total_count = count1
     print("<------------->")
     print(total_count)
-    print("<------------->")
-    print(str(image.query))
     if request.user.is_staff or request.user.is_superuser:
         queryset_list = Post.objects.all()
     query = request.GET.get("q")
@@ -184,12 +186,14 @@ def posts_list(request, id=None):
         queryset = paginator.page(paginator.num_pages)
     context = {
         "object_list": queryset,
-        "title": "Django Blog",
+        "title": "Blog Book",
         "page_request_var": page_request_var,
         "today": today,
         "title_list": title_list,
         "image": image,
-        "count": range(0, total_count),
+        "zip": zip(queryset, image),
+        "count": list(image),
+        "img": img,
 
     }
     return render(request, "post_list.html", context)
@@ -224,6 +228,20 @@ def posts_delete(request, slug=None):
     instance.delete()
     messages.success(request, "Successfully Deleted")
     return redirect("posts:list")
+
+
+def delete_image(request, id=None, slug=None):
+    instance = get_object_or_404(Post, slug=slug)
+    del_image = Images.objects.get(id=id).delete()
+    # del_image.delete()
+    return redirect("posts:list")
+
+    # post_id = instance.pk
+    # image = Images.objects.filter(post=post_id, is_deleted=1)
+    # context = {
+    #     "image": image,
+    # }
+    # return redirect("posts:list")
 
 
 def about(request):
@@ -336,6 +354,16 @@ def like_post(request):
     post.likes = likes
     post.save()
     return HttpResponse(likes, liked)
+
+
+def display_image(request, slug=None):
+    instance = get_object_or_404(Post, slug=slug)
+    post_id = instance.pk
+    image = Images.objects.filter(post=post_id)
+    context = {
+        "image": image,
+    }
+    return render(request, "delete_image.html", context)
 
 
 def showvideo(request):

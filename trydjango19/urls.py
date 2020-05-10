@@ -7,7 +7,7 @@ from django.contrib.auth.models import User
 from accounts.views import (
     login_view, register_view, logout_view, change_password, setting, password)
 from posts.views import (posts_create, posts_delete,
-                         posts_update, about, contact, get_user_profile, posts_list, post_image)
+                         posts_update, about, contact, get_user_profile, posts_list, post_image, display_image)
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -27,6 +27,7 @@ urlpatterns = [
     url(r'profile/$',
         get_user_profile, name='profile'),
     url(r'^password_change/$', change_password, name='change_pwd'),
+
 
 
 ]

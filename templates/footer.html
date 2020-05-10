@@ -2,6 +2,7 @@
 <!--  -->
 {% load staticfiles %}
 <link rel="stylesheet" href='{% static "css/footer.css" %}' />
+<link rel="stylesheet" href='{% static "images" %}' />
 <link
   rel="stylesheet"
   href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css"
@@ -16,9 +17,9 @@
   <footer class="footer-distributed">
     <div class="footer-left">
       <img
-        src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Blogger.svg/1200px-Blogger.svg.png"
+        src="../static/images/logo.jpg"
       />
-      <h3>Django<span>Blog</span></h3>
+      <h3>Blog<span>Book</span></h3>
 
       <p class="footer-links">
         <a href='{% url "posts:list" %}'>Home</a>
