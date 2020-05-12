@@ -30,6 +30,7 @@ urlpatterns = [
     url(r'^(?P<slug>[\w-]+)/mul-images/$', post_image, name='mul-images'),
     url(r'^(?P<slug>[\w-]+)/image/$',
         display_image, name='image'),
+    url(r'^(?P<slug>[\w-]+)/delete/$', posts_delete, name='delete'),
 
 
 ]
