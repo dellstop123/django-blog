@@ -1,4 +1,5 @@
 from django.conf.urls import url
+
 from django.contrib import admin
 
 from .views import (
@@ -15,6 +16,7 @@ from .views import (
     delete_image,
 )
 
+
 urlpatterns = [
     url(r'^$', posts_list, name='list'),
     url(r'^create/$', posts_create),
@@ -27,6 +29,7 @@ urlpatterns = [
         postpreference, name='postpreference'),
     url(r'^(?P<slug>[\w-]+)/mul-images/$', post_image, name='mul-images'),
     url(r'^(?P<slug>[\w-]+)/image/$',
-        display_image, name='image')
+        display_image, name='image'),
+
 
 ]

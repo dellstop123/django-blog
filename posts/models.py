@@ -35,7 +35,7 @@ def upload_location(instance, filename):
 
 class Post(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL,
-                             default=1,)
+                             default=1, on_delete=models.CASCADE)
     title = models.CharField(max_length=120)
     slug = models.SlugField(unique=True)
     image = models.ImageField(upload_to=upload_location,
@@ -121,8 +121,8 @@ class User(models.Model):
 
 
 class Preference(models.Model):
-    user = models.ForeignKey(User, )
-    post = models.ForeignKey(Post,)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
     value = models.IntegerField()
     date = models.DateTimeField(auto_now=True)
 
@@ -134,7 +134,7 @@ class Preference(models.Model):
 
 
 class Images(models.Model):
-    post = models.ForeignKey(Post,)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
     image = models.ImageField(upload_to=upload_location,
                               null=True, blank=True, width_field="width_field", height_field="height_field")
     # multiple_img = models.FileField(upload_to=upload_location)
@@ -149,7 +149,7 @@ class Video(models.Model):
     name = models.CharField(max_length=500)
     videofile = models.FileField(
         upload_to='videos/', null=True, blank=True,)
-    post = models.ForeignKey(Post, )
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
 
     def __str__(self):
         return str(self.videofile)

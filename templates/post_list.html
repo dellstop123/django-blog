@@ -48,13 +48,19 @@
           <p>Author: {{ obj.user.get_full_name }}</p>
 
           {% endif %}
-          <p class="post-detail-item">
+           <!-- <p  class="post-detail-item" style="min-height: 0 !important;max-height: 150px !important;
+           overflow-y: scroll;">
             {{ obj.content|linebreaks|truncatechars:200 }}
-          </p>
+          </p>  -->
+
+           <table >
+          <tr><td><div class = "post-detail-item" style="overflow: auto; width : 500px; height : 150px;">
+            {{ obj.get_markdown|linebreaks }}
+          </div></td></tr></table> </br>
           <p>
             <a
               href="{{ obj.get_absolute_url }}"
-              class="btn btn-primary btn-sm btn-block"
+              class="btn btn-primary "
               role="button"
               >View</a
             >

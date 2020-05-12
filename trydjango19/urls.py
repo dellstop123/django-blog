@@ -8,9 +8,17 @@ from accounts.views import (
     login_view, register_view, logout_view, change_password, setting, password)
 from posts.views import (posts_create, posts_delete,
                          posts_update, about, contact, get_user_profile, posts_list, post_image, display_image)
+# from chat.views import (
+#     ChannelDetailView,
+#     PrivateMessageDetailView
+# )
+
+# UUID_CHANNEL_REGEX = r'^channel/(?P<pk>[a-f0-9]{8}-?[a-f0-9]{4}-?4[a-f0-9]{3}-?[89ab][a-f0-9]{3}-?[a-f0-9]{12})'
+
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url('chat/', include('chat.urls')),
     url(r'^$', posts_list, name='list'),
     url(r'^settings/$', setting, name='settings'),
     url(r'^settings/password/$', password, name='password'),
@@ -27,8 +35,11 @@ urlpatterns = [
     url(r'profile/$',
         get_user_profile, name='profile'),
     url(r'^password_change/$', change_password, name='change_pwd'),
-
-
+    # url(UUID_CHANNEL_REGEX, ChannelDetailView.as_view(), name='channel'),
+    # url(r'^channel/<slug:pk>/$',
+    #     ChannelDetailView.as_view(), name='channel'),
+    # url("dm/<str:username>", PrivateMessageDetailView.as_view(),
+    #     name='private-message'),
 
 ]
 

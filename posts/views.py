@@ -10,7 +10,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib.contenttypes.models import ContentType
-from .forms import PostForm, ProfileForm, PasswordForm, VideoForm, ImageForm, PictureWidget
+from .forms import PostForm, ProfileForm, PasswordForm, VideoForm, ImageForm
 from django.db.models import Q
 from accounts.views import login_view, logout_view
 from comment.forms import CommentForm
@@ -45,8 +45,8 @@ def post_image(request, slug=None):
 
 
 def posts_create(request):
-    if not request.user.is_authenticated():
-        raise Http404
+    # if not request.user.is_authenticated():
+    #     raise Http404
     # Imageformset = modelformset_factory(
     #     Images, fields=('post', 'image',), extra=1)
     if request.method == 'POST':

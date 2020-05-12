@@ -21,11 +21,11 @@
       crossorigin="anonymous"
     />
 
-     <script>
+     <!-- <script>
  
     $(".carousel-inner").next().addClass('active');
      
-</script>
+</script> -->
     <link
       rel="stylesheet"
       href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"
@@ -34,6 +34,7 @@
     <!-- <link rel="stylesheet" href='{% static "css/slider.css" %}' /> -->
     <link rel="stylesheet" href='{% static "css/base.css" %}' />
     <link rel="stylesheet" href='{% static "css/modal.css" %}' />
+ 
     {% render_section_header %}
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
@@ -128,6 +129,9 @@
         {% if request.path == '/posts/' %}
         <li class="pull-center">
           <a href='{% url "create" %}'>Create Blog</a>
+        </li>
+        <li class="pull-center">
+          <a href='{% url "index" %}'>Index</a>
         </li>
         {% endif %}
         <!--  -->

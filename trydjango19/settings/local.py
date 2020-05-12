@@ -2,6 +2,10 @@
 from django.contrib.messages import constants as messages
 import os
 import mysql.connector
+
+import pymysql
+pymysql.version_info = (1, 3, 13, "final", 0)
+pymysql.install_as_MySQLdb()
 # import pymongo
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -9,7 +13,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(
     os.path.dirname(os.path.abspath(__file__))))
 # BASE_DIR = os.path.dirname(os.path.dirname(
 #     os.path.dirname(os.path.abspath(__file__))))
-
+# BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SECURITY WARNING: keep the secret key used in production secret!
 
 SECRET_KEY = '=_k=6s&(3^$1godh97db!w9$5y#e^j#2s$n75vxks%a-=n$5vf'
@@ -45,11 +49,13 @@ INSTALLED_APPS = [
     'pagedown',
     'adcode',
     'social_django',
+    'channels',
 
 
     # local apps
     'comment',
     'posts',
+    'chat'
 
 ]
 
@@ -76,13 +82,13 @@ ADCODE_PLACEHOLDER_TEMPLATE = 'http://placekitten.com/{width}/{height}'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
 
-MIDDLEWARE_CLASSES = [
+MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
+    # 'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'social_django.middleware.SocialAuthExceptionMiddleware',
@@ -110,6 +116,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'trydjango19.wsgi.application'
+
 
 AUTHENTICATION_BACKENDS = (
     'social_core.backends.github.GithubOAuth2',
@@ -150,6 +157,7 @@ DATABASES = {
         'PASSWORD': '',
         'HOST': '127.0.0.1',
         'PORT': '3306',
+
     }
 }
 
@@ -219,6 +227,16 @@ STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), "static_cdn")
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), "media_cdn")
 
+ASGI_APPLICATION = 'trydjango19.routing.application'
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            "hosts": [('localhost', 6379)],
+
+        },
+    },
+}
 
 # CORS_REPLACE_HTTPS_REFERER = False
 # HOST_SCHEME = "http://"
