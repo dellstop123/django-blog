@@ -157,13 +157,13 @@ def posts_list(request, id=None):
     today = timezone.now().date()
     queryset_list = Post.objects.active()
     title_list = Post.objects.all()
-    image = Post.objects.raw(
-        """select image,id from posts_post union select image,post_id from posts_images;""")
-    count1 = len(list(image))
-    img = Images.objects.select_related('post')
-    total_count = count1
-    print("<------------->")
-    print(total_count)
+    # image = Post.objects.raw(
+    #     """select image,id from posts_post union select image,post_id from posts_images;""")
+    # count1 = len(list(image))
+    # img = Images.objects.select_related('post')
+    # total_count = count1
+    # print("<------------->")
+    # print(total_count)
     if request.user.is_staff or request.user.is_superuser:
         queryset_list = Post.objects.all()
     query = request.GET.get("q")
@@ -190,10 +190,10 @@ def posts_list(request, id=None):
         "page_request_var": page_request_var,
         "today": today,
         "title_list": title_list,
-        "image": image,
-        "zip": zip(queryset, image),
-        "count": list(image),
-        "img": img,
+        # "image": image,
+        # "zip": zip(queryset, image),
+        # "count": list(image),
+        # "img": img,
 
     }
     return render(request, "post_list.html", context)

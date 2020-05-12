@@ -14,25 +14,7 @@
 <!-- Homepage Leaderboard -->
 
 <div class="rightnav">
-  <!-- <ins
-    class="adsbygoogle"
-    style="display: inline-block; width: 728px; height: 90px;"
-    data-ad-client="ca-pub-1234567890123456"
-    data-ad-slot="1234567890"
-  ></ins> -->
 
-  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<ins class="adsbygoogle"
- style="display:block" width: 3408px; height: 100%;
- data-ad-client="ca-pub-1234567890123456"
- data-ad-slot="1234567890"
- data-adtest="on"
- google_adtest = on;
- data-ad-format="auto"
- data-full-width-responsive="true"></ins>
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script>
   <label class="title">
     {{ filter }}
   </label>
@@ -40,12 +22,10 @@
   {% for list in comment_list %}
 
   <a href="{{ list.get_absolute_url }}">
-    {{list.Comment|linebreaks|truncatechars:50 |inject_adsense_after_paragraph:1}}
+    {{list.Comment|linebreaks|truncatechars:50 }}
   </a>
   <hr />
   {% endfor %}
-  <script>
-    (adsbygoogle = window.adsbygoogle || []).push({});
-  </script>
+
 </div>
 {% endif %} {% endblock %}

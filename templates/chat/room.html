@@ -5,19 +5,72 @@
 {% block content %}
 
 <!-- chat/templates/chat/room.html -->
+<div class="container">
+    <div class="page-header">
+        <h1>Welcome to ChatApp
+            <small>Pick a user and start chatting!</small>
+        </h1>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <div id="user-list" class="list-group">
+                <a href="" class="list-group-item disabled">
+                    <h4 class="list-group-item-heading">Users</h4>
+                    {# Users go here #}
+                </a>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h4 class="panel-title">Chat</h4>
+                </div>
+                <div>
+                    <ul id="chat-log" class="messages">
+                        {# Messages go here #}
+                    </ul>
+                </div>
+                <div class="panel-footer">
+                    <div class="input-group">
+                        <input id="chat-message-input" type="text"
+                               class="form-control input"
+                               placeholder="Type your message here ..."
+                               maxlength="500">
+                        <span class="input-group-btn">
+                        <button class="btn btn-info btn"
+                                id="chat-message-submit">
+                            Send</button>
+                    </span>
+                    </div>
+                </div>
+            </div>
 
-    <meta charset="utf-8"/>
-    <title>Chat Room</title>
 
-    <div class="msj-rta macro" style="margin:auto">
-        <textarea class="text text-r" style="background:whitesmoke !important" id="chat-log" cols="100" rows="20"></textarea><br>
-        <input placeholder="Type a message" id="chat-message-input" type="text" size="100"><br>
-        <input id="chat-message-submit" class="btn btn-primary" type="button" value="Send">
-   </div>
-
+        </div>
+    </div>
+</div>
     {{ room_name|json_script:"room-name" }}
     <script>
         var roomName = JSON.parse(document.getElementById('room-name').textContent);
+        let currentRecipient ="";
+
+        function drawMessage(message) {
+            let position = 'left';
+            const date = new Date(message.timestamp);
+            if (message.user === currentUser) position = 'right';
+            const messageItem = `
+                    <li class="message ${position}">
+                        <div class="avatar">${message.user}</div>
+                            <div class="text_wrapper">
+                                <div class="text">${message.body}<br>
+                                    <span class="small">${date}</span>
+                            </div>
+                        </div>
+                    </li>`;
+            $(messageItem).appendTo('#messages');
+        }
+
+        
 
         var chatSocket = new WebSocket(
             'ws://'
@@ -28,9 +81,18 @@
         );
 
         chatSocket.onmessage = function(e) {
-            var data = JSON.parse(e.data);
-            document.querySelector('#chat-log').value += (data.message + '\n');
-        };
+            var data = JSON.parse(e.data).message;
+            // id = JSON.parse(e.data).message
+           
+                if (data.user === currentRecipient ||
+                    (data.recipient === currentRecipient && data.user == currentUser)) {
+                    drawMessage(data);
+                }
+                $("#chat-log").animate({scrollTop: $("#chat-log").prop('scrollHeight')});
+          
+        }
+        //     document.querySelector('#chat-log').value += (data.message + '\n');
+        // };
 
         chatSocket.onclose = function(e) {
             console.error("Chat socket closed unexpectedly");
@@ -52,5 +114,8 @@
             messageInputDom.value = " ";
         };
     </script>
-
+ <script>
+    let sessionKey = '{{ request.session.session_key }}';
+    let currentUser = '{{ request.user.username }}';
+</script>
 {% endblock %}

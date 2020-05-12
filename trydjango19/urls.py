@@ -18,8 +18,9 @@ from posts.views import (posts_create, posts_delete,
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url('chat/', include('chat.urls')),
+    # url('chat/', include('chat.urls')),
     url(r'^$', posts_list, name='list'),
+    url(r'', include('chat.urls')),
     url(r'^settings/$', setting, name='settings'),
     url(r'^settings/password/$', password, name='password'),
     url(r'^posts/', include(("posts.urls", "app_name"), namespace="posts")),

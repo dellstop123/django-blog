@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'adcode',
     'social_django',
     'channels',
+    'rest_framework',
 
 
     # local apps
@@ -161,6 +162,22 @@ DATABASES = {
     }
 }
 
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated'
+    ],
+    'DEFAULT_PAGINATION_CLASS':
+        'rest_framework.pagination.LimitOffsetPagination',
+    'PAGE_SIZE': 100
+}
+MESSAGES_TO_LOAD = 15
+
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "asgiref.inmemory.ChannelLayer",
+        "ROUTING": "core.routing.channel_routing",
+    },
+}
 # Mongo Db Database Connection
 
 # DATABASES = {

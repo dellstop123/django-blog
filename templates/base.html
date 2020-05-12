@@ -45,59 +45,16 @@
     />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}"/>
     {% block head_extra %} {% endblock head_extra %}
     <!--  -->
   </head>
   <body>
     
-    
-
-    <!-- {% if section and placements and not debug %}
-    <script>
-      var googletag = googletag || {};
-      googletag.cmd = googletag.cmd || [];
-      (function () {
-        var gads = document.createElement("script");
-        gads.async = true;
-        gads.type = "text/javascript";
-        var useSSL = "https:" == document.location.protocol;
-        gads.src =
-          (useSSL ? "https:" : "http:") +
-          "//www.googletagservices.com/tag/js/gpt.js";
-        var node = document.getElementsByTagName("script")[0];
-        node.parentNode.insertBefore(gads, node);
-      })();
-    </script>
-    <script>
-      googletag.cmd.push(function () {
-        "{% for placement in placements %}";
-        googletag
-          .defineSlot(
-            "{{ placement.remote_id }}",
-            ["{{ placement.width }}", "{{ placement.height }}"],
-            "div-gpt-ad-{{ placement.id }}"
-          )
-          .addService(googletag.pubads());
-        ("{% endfor %}");
-        googletag.pubads().enableSingleRequest();
-        googletag.enableServices();
-      });
-    </script>
-    {% endif %} -->
-    <!-- <script
-      async
-      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
-    ></script> -->
-    <!-- Homepage Leaderboard -->
-    <!-- <ins
-      class="adsbygoogle"
-      style="display: inline-block; width: 728px; height: 90px;"
-      data-ad-client="ca-pub-1234567890123456"
-      data-ad-slot="1234567890"
-    ></ins> -->
-    <!-- <script>
-      (adsbygoogle = window.adsbygoogle || []).push({});
-    </script> -->
     <div id="fb-root"></div>
     <script>
       (function (d, s, id) {
@@ -131,7 +88,7 @@
           <a href='{% url "create" %}'>Create Blog</a>
         </li>
         <li class="pull-center">
-          <a href='{% url "index" %}'>Index</a>
+          <a href='{% url "home" %}'>Index</a>
         </li>
         {% endif %}
         <!--  -->
