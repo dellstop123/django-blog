@@ -88,19 +88,7 @@
     {% endif %}
 {% endif %}
 </p>
-<!-- <a href="#" onClick="document.getElementById('likebutton').submit()">Like This Post</a> {{instance.likepost}}   |   
-<a href="#" onClick="document.getElementById('dislikebutton').submit()">Dislike This Post</a> {{instance.dislikes}}
 
-
-<form id="likebutton" method="POST" action="{{ request.build_absolute_uri }}{{instance.id}}/preference/1/">
-{% csrf_token %}
-<input type="hidden">
-</form>
-
-<form id="dislikebutton" method="POST" action="{{ request.build_absolute_uri }}{{instance.id}}/preference/2/">
-{% csrf_token %}
-<input type="hidden">
-</form> -->
 
 
 <!-- <p>

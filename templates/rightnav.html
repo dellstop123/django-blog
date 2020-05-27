@@ -1,31 +1,31 @@
 {% load staticfiles %} {% load adcode_tags %}{% block content %}
 <!--  -->
-{% load adsense_tags %}
-{% if debug %}
-<img
-  alt="{{ placement }}"
-  title="{{ placement }}"
-  src="{{ placement.placeholder }}"
-/>
-{% else %}
+
 <!-- Here you would put the actual ad code needed -->
 
 <link rel="stylesheet" href='{% static "css/rightnav.css" %}' />
+<script src='{% static "js/app.js" %}' ></script>
 <!-- Homepage Leaderboard -->
 
 <div class="rightnav">
 
-  <label class="title">
-    {{ filter }}
-  </label>
-  <hr />
-  {% for list in comment_list %}
+  <!-- {% for list in comment_list %}
 
   <a href="{{ list.get_absolute_url }}">
     {{list.Comment|linebreaks|truncatechars:50 }}
   </a>
   <hr />
-  {% endfor %}
-
+  {% endfor %} -->
+  <div class="row" > 
+  <div class="col-md-12" style="text-align: center;">
+    <div id="user-list" class="list-group">
+      <a href="" class="list-group-item disabled">
+        <h4 class="list-group-item-heading">Users</h4>
+        {# Users go here #}
+      </a>
+      <span class="badge"></span>
+    </div>
+  </div>
 </div>
-{% endif %} {% endblock %}
+</div>
+ {% endblock %}

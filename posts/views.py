@@ -10,13 +10,12 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib.contenttypes.models import ContentType
-from .forms import PostForm, ProfileForm, PasswordForm, VideoForm, ImageForm
+from .forms import PostForm, ProfileForm, PasswordForm, ImageForm
 from django.db.models import Q
 from accounts.views import login_view, logout_view
 from comment.forms import CommentForm
 from comment.models import Comment
 from django.forms import modelformset_factory
-from .models import Video
 try:
     from django.urls import reverse
 except ImportError:
@@ -164,6 +163,7 @@ def posts_list(request, id=None):
     # total_count = count1
     # print("<------------->")
     # print(total_count)
+
     if request.user.is_staff or request.user.is_superuser:
         queryset_list = Post.objects.all()
     query = request.GET.get("q")
@@ -364,20 +364,3 @@ def display_image(request, slug=None):
         "image": image,
     }
     return render(request, "delete_image.html", context)
-
-
-def showvideo(request):
-
-    lastvideo = Video.objects.all()
-
-    videofile = lastvideo.videofile
-
-    form = VideoForm(request.POST or None, request.FILES or None)
-    if form.is_valid():
-        form.save()
-
-    context = {'videofile': videofile,
-               'form': form
-               }
-
-    return render(request, 'post_detail.html', context)

@@ -5,9 +5,9 @@ from django.contrib.auth import (
     login,
     logout,
 )
+from django.contrib.auth.models import User
 
-
-User = get_user_model()
+# User = get_user_model()
 
 
 class UserLoginForm(forms.Form):

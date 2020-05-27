@@ -8,6 +8,8 @@ from rest_framework.authentication import SessionAuthentication
 from trydjango19.settings import local
 from chat.serializers import MessageModelSerializer, UserModelSerializer
 from chat.models import MessageModel
+from datetime import timedelta
+from online_users.models import OnlineUserActivity
 
 
 class CsrfExemptSessionAuthentication(SessionAuthentication):
@@ -62,5 +64,14 @@ class UserModelViewSet(ModelViewSet):
 
     def list(self, request, *args, **kwargs):
         # Get all users except yourself
+        user_activity_objects = OnlineUserActivity.get_user_activities(
+            timedelta(minutes=60))
+        online = []
+        for user in user_activity_objects:
+            users = user
+            online.append(user.user_id)
+        # self.queryset = self.queryset.union(online)
         self.queryset = self.queryset.exclude(id=request.user.id)
+        print(online)
+
         return super(UserModelViewSet, self).list(request, *args, **kwargs)

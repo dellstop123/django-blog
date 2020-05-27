@@ -7,6 +7,7 @@ from django.contrib.auth.models import User
 from django.db.models import (Model, TextField, DateTimeField, ForeignKey,
                               CASCADE)
 
+# from asgiref.sync import async_to_sync
 from asgiref.sync import async_to_sync
 from channels.layers import get_channel_layer
 

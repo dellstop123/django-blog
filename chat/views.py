@@ -94,9 +94,13 @@
 
 
 # chat/views.py
+from django.contrib.auth.models import User
+from django.utils import timezone
+from django.contrib.sessions.models import Session
 from django.shortcuts import render
 from django.utils.safestring import mark_safe
 import json
+from chat.models import MessageModel
 
 
 def index(request):
@@ -107,3 +111,20 @@ def room(request, room_name):
     return render(request, 'chat/room.html', {
         'room_name': room_name
     })
+
+
+def get_message(request):
+    # user = User.objects.get(id=id)
+    messages = MessageModel.objects.filter(
+        recipient_id=request.user.id).order_by('-timestamp')[:5]
+    my_recipient = []
+    bdy = []
+    for i in messages:
+        recipient_name = User.objects.get(id=i.user_id)
+        my_recipient.append(recipient_name)
+        bdy.append(i.body)
+        # return render(request, "chat/index.html", {'name': recipient_name, 'data': messages})
+    # print(list(bdy), list(my_recipient))
+    element = dict(zip(bdy, my_recipient))
+    print(element)
+    return render(request, "chat/index.html", {'data': messages, 'name': element})

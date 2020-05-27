@@ -1,0 +1,68 @@
+
+<nav class="navbar navbar-inverse navbar-static-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed"
+                    data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href='{% url "posts:list" %}'>
+                <i class="fa fa-comments"></i> Home
+            </a>
+        </div>
+
+        <div id="navbar" class="navbar-collapse collapse">
+
+            <ul class="nav navbar-nav navbar-right">
+                {% if request.user.is_authenticated %}
+                    <li>
+                        <a href="">
+                            <i class="fa fa-user-circle" aria-hidden="true"></i>
+                            {{ request.user }}
+                        </a>
+                    </li>
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          Dropdown
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                          <button src = "{% url 'logout' %}" class="fa fa-sign-out" type="button">Log Out</button>
+                          <button src='{% url "create" %}' class="dropdown-item" type="button">Create Blog</button>
+                          <button src='{% url "home" %}' class="dropdown-item" type="button">Messages</button>
+                          <button src='{% url "settings" %}' class="dropdown-item" type="button">Settings</button>
+                          <button src='{% url "change_pwd" %}' class="dropdown-item" type="button">Change Password</button>
+                          <button src='{% url "profile" %}' class="dropdown-item" type="button">Profile</button>
+                          <button src='{% url "home" %}' class="dropdown-item" type="button">Messages</button>
+                          {% if instance and not request.path == '/profile/' %}
+                            <!--  -->
+                           {% if not '/edit/' in request.path  %}
+                          <button src="{{ request.path }}edit" class="dropdown-item" type="button">Edit Blog</button>
+                          <button src="{{ request.path }}mul-images" class="dropdown-item" type="button">Add Images</button>
+                          <button src="{{ request.path }}image" class="dropdown-item" type="button">Delete Images</button>
+                          <button src="{{ request.path }}delete" class="dropdown-item" type="button">Delete Blog</button>
+                          {% endif %}{% endif %}
+                        </div>
+                      </div>
+                {% else %}
+                    <li>
+                        <a href="{% url 'login' %}">
+                            <i class="fa fa-sign-in" aria-hidden="true"></i>
+                            Log In
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'register' %}">
+                            <i class="fa fa-sign-in" aria-hidden="true"></i>
+                            Register
+                        </a>
+                    </li>
+                {% endif %}
+            </ul>
+
+        </div>
+    </div>
+</nav>

@@ -13,7 +13,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(
     os.path.dirname(os.path.abspath(__file__))))
 # BASE_DIR = os.path.dirname(os.path.dirname(
 #     os.path.dirname(os.path.abspath(__file__))))
-# BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+# BASE_DIR = os.path.dirname((os.path.realpath(__file__)))
 # SECURITY WARNING: keep the secret key used in production secret!
 
 SECRET_KEY = '=_k=6s&(3^$1godh97db!w9$5y#e^j#2s$n75vxks%a-=n$5vf'
@@ -51,7 +51,10 @@ INSTALLED_APPS = [
     'social_django',
     'channels',
     'rest_framework',
-
+    'webpush',
+    'online_users',
+    'notifications',
+    'star_ratings',
 
     # local apps
     'comment',
@@ -59,6 +62,20 @@ INSTALLED_APPS = [
     'chat'
 
 ]
+
+WEBPUSH_SETTINGS = {
+    "VAPID_PUBLIC_KEY": "123456789",
+    "VAPID_PRIVATE_KEY": "qwerttyuiop",
+    "VAPID_ADMIN_EMAIL": "guneetsinghbali@gmail.com"
+}
+
+
+{
+    "BACKEND": "django_jinja.backend.Jinja2",
+    "OPTIONS": {
+        'extensions': ['webpush.jinja2.WebPushExtension'],
+    }
+},
 
 # oauth-tokens settings
 OAUTH_TOKENS_HISTORY = True  # to keep in DB expired access tokens
@@ -68,7 +85,7 @@ OAUTH_TOKENS_FACEBOOK_SCOPE = ['offline_access']  # application scopes
 OAUTH_TOKENS_FACEBOOK_USERNAME = ''  # user login
 OAUTH_TOKENS_FACEBOOK_PASSWORD = ''  # user password
 
-
+DJANGO_NOTIFICATIONS_CONFIG = {'USE_JSONFIELD': True}
 # TEMPLATE_CONTEXT_PROCESSORS = (
 #     # Other context processors would go here
 #     'adcode.context_processors.current_placements',
@@ -93,6 +110,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'social_django.middleware.SocialAuthExceptionMiddleware',
+    'online_users.middleware.OnlineNowMiddleware',
 ]
 LOGIN_URL = "/login/"
 ROOT_URLCONF = 'trydjango19.urls'
@@ -115,6 +133,22 @@ TEMPLATES = [
         },
     },
 ]
+
+# Setup caching per Django docs. In actuality, you'd probably use memcached instead of local memory.
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+        'LOCATION': 'default-cache'
+    }
+}
+
+STAR_RATINGS_RERATE = False
+# Number of seconds of inactivity before a user is marked offline
+USER_ONLINE_TIMEOUT = 300
+
+# Number of seconds that we will keep track of inactive users for before
+# their last seen is removed from the cache
+USER_LASTSEEN_TIMEOUT = 60 * 60 * 24 * 7
 
 WSGI_APPLICATION = 'trydjango19.wsgi.application'
 
@@ -178,20 +212,6 @@ CHANNEL_LAYERS = {
         "ROUTING": "core.routing.channel_routing",
     },
 }
-# Mongo Db Database Connection
-
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'djongo',
-#         'NAME': 'your-db-name',  # as named on server
-
-#         'HOST': 'mongodb+srv://guneet_007:<password>@cluster0-qcsk6.mongodb.net/test?retryWrites=true&w=majority',
-#         # that is your connection link with your username,password and db name,here i created a db using mlabs of mongodb
-#            'USER' : '<dbuser>',
-#         'PASSWORD': 'FkXi2FRClQBt4tec',
-
-#     }
-# }
 
 
 # Password validation
@@ -240,7 +260,9 @@ STATICFILES_DIRS = [
 
 # STATICFILES_STORAGE = 'trydjango19.storage.S3Storage'
 
-STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), "static_cdn")
+STATIC_ROOT = os.path.join(
+    BASE_DIR, "static_cdn")
+print("GGG", STATIC_ROOT)
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), "media_cdn")
 

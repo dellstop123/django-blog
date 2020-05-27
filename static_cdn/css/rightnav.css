@@ -1,0 +1,47 @@
+.rightnav {
+  height: 100%;
+  width: 340px;
+  position: fixed;
+  z-index: auto;
+  top: 37;
+  right: 0;
+  background-color: whitesmoke;
+  font-family: "Times New Roman", Times, serif;
+  overflow-y: scroll;
+  padding-top: 20px;
+  bottom: 30px;
+  word-wrap: break-word;
+}
+/* Hide scrollbar for Chrome, Safari and Opera */
+.rightnav::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE and Edge */
+.rightnav {
+  -ms-overflow-style: none;
+}
+.rightnav a {
+  padding: 6px 8px 6px 16px;
+  text-decoration: none;
+  font-size: 25px;
+  color: skyblue;
+  display: block;
+}
+
+.rightnav a:hover {
+  color: black;
+}
+
+.main {
+  margin-left: 160px;
+  padding: 0px 10px;
+}
+
+.title {
+  font-family: "Times New Roman", Times, serif;
+  font-size: 30;
+  text-align: center;
+  padding-left: 30%;
+  display: inline-block;
+}

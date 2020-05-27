@@ -13,7 +13,9 @@ from django.contrib import messages
 import os
 from django.contrib.auth import update_session_auth_hash
 from .email import mail
+from datetime import timedelta
 from .forms import UserLoginForm, UserRegisterForm
+from django.contrib.auth.signals import user_logged_in, user_logged_out
 from social_django.models import UserSocialAuth
 from django.contrib.auth.forms import AdminPasswordChangeForm, PasswordChangeForm
 
@@ -35,7 +37,7 @@ def login_view(request):
         if next:
             return redirect(next)
         return redirect("/posts")
-    return render(request, "login.html", {"form": form, "title": title})
+    return render(request, "login.html", {"form": form, "title": title, })
 
 
 def register_view(request):
@@ -58,7 +60,7 @@ def register_view(request):
 
     context = {
         "form": form,
-        "title": title
+        "title": title,
     }
     return render(request, "form.html", context)
 

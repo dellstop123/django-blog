@@ -2,7 +2,7 @@ from django import forms
 from pagedown.widgets import PagedownWidget
 from string import Template
 from django.utils.safestring import mark_safe
-from .models import Post, Video, Images
+from .models import Post, Images
 from django.contrib.auth.models import User
 from django.forms import widgets
 
@@ -50,12 +50,6 @@ class PasswordForm(forms.ModelForm):
         fields = [
             'password',
         ]
-
-
-class VideoForm(forms.ModelForm):
-    class Meta:
-        model = Video
-        fields = ["name", "videofile"]
 
 
 class ImageForm(forms.ModelForm):

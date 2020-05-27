@@ -8,6 +8,7 @@ except ImportError:
     from django.core.urlresolvers import reverse
 from django.conf import settings
 from django.utils import timezone
+from django.core.cache import cache
 from django.contrib.auth.models import User
 from django.db.models.signals import pre_save
 from django.utils.safestring import mark_safe
@@ -15,7 +16,7 @@ from django.utils.safestring import mark_safe
 from django.template.defaultfilters import slugify
 # Create your models here.
 from markdown_deux import markdown
-
+import datetime
 from comment.models import Comment
 
 from .utils import get_read_time
@@ -119,6 +120,20 @@ class User(models.Model):
     isStaff = models.BooleanField()
     # password = models.CharField(max_length=120)
 
+    def last_seen(self):
+        return cache.get('seen_%s' % self.user.username)
+
+    def online(self):
+        if self.last_seen():
+            now = datetime.datetime.now()
+            if now > self.last_seen() + datetime.timedelta(
+                    seconds=settings.USER_ONLINE_TIMEOUT):
+                return False
+            else:
+                return True
+        else:
+            return False
+
 
 class Preference(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -143,13 +158,3 @@ class Images(models.Model):
 
     def __str__(self):
         return self.post.title
-
-
-class Video(models.Model):
-    name = models.CharField(max_length=500)
-    videofile = models.FileField(
-        upload_to='videos/', null=True, blank=True,)
-    post = models.ForeignKey(Post, on_delete=models.CASCADE)
-
-    def __str__(self):
-        return str(self.videofile)
