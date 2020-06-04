@@ -2,7 +2,7 @@
 from django.contrib.messages import constants as messages
 import os
 import mysql.connector
-
+import dj_database_url
 import pymysql
 pymysql.version_info = (1, 3, 13, "final", 0)
 pymysql.install_as_MySQLdb()
@@ -202,6 +202,10 @@ DATABASES = {
 
     }
 }
+# Application definition
+db_from_env = dj_database_url.config()
+DATABASES['default'].update(db_from_env)
+DATABASES['default']['CONN_MAX_AGE'] = 500
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
