@@ -2,7 +2,7 @@
 
 
 
-<div class="col-sm-9 " style="background-color:steelblue;">
+<div class="col-sm-6 col-sm-offset-3 " style="background-color:steelblue;">
   <h1 style="text-align: center;" class="col-sm-12 ">
     {{ title }}
   </h1>
@@ -98,10 +98,7 @@
       {% endif %}
     </span>
   </div>
-  {% if request.user.is_authenticated %}
-{% include "rightnav.html" %} 
 
-{% endif %}
 
 
 </div>

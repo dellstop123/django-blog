@@ -32,8 +32,9 @@ urlpatterns = [
     url(r'^password_change/$', change_password, name='change_pwd'),
     url(r'inbox/notifications/',
         include(notifications.urls, namespace='notifications')),
-    url(r'^ratings/', include(('star_ratings.urls', "app_name"),
-                              namespace='ratings')),
+    # url(r'^ratings/', include(('star_ratings.urls', "app_name"),
+    #                           namespace='ratings')),
+    # url(r'', include('payments.urls')),  # new
 ]
 
 

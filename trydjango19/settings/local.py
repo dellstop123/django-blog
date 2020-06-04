@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'payments.apps.PaymentsConfig',
     # third party
     'crispy_forms',
     'markdown_deux',
@@ -173,6 +174,12 @@ SOCIAL_AUTH_FACEBOOK_SECRET = '4e4b269f424cdf871fb00d03a5056286'  # App Secret
 SOCIAL_AUTH_LOGIN_ERROR_URL = '/settings/'
 SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/settings/'
 SOCIAL_AUTH_RAISE_EXCEPTIONS = False
+# Stripe Payment method
+# STRIPE_LIVE_PUBLIC_KEY = os.environ.get("STRIPE_LIVE_PUBLIC_KEY", "<your publishable key>")
+# STRIPE_LIVE_SECRET_KEY = os.environ.get("STRIPE_LIVE_SECRET_KEY", "<your secret key>")
+STRIPE_PUBLISHABLE_KEY = "pk_test_cpvMsjo2FgaiI5H8H0Y06OuF00j0020LKu"
+STRIPE_TEST_SECRET_KEY = "sk_test_EUwBtaxTiHCm51mDIoiJofmF00PUjmwOo4"
+STRIPE_LIVE_MODE = False  # Change to True in production
 
 # Database
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
@@ -262,9 +269,8 @@ STATICFILES_DIRS = [
 
 STATIC_ROOT = os.path.join(
     BASE_DIR, "static_cdn")
-print("GGG", STATIC_ROOT)
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), "media_cdn")
+MEDIA_ROOT = os.path.join(BASE_DIR, "media_cdn")
 
 ASGI_APPLICATION = 'trydjango19.routing.application'
 CHANNEL_LAYERS = {

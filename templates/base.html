@@ -104,7 +104,7 @@
     
     <div id="fb-root"></div>
   
-    <div class="container" id="" style="width : 100% !important;">
+    <div class="container" style="width : 100% !important;">
       
       <ol class="breadcrumb" >
         <li class="pull-left"><a href='{% url "posts:list" %}'>Home</a></li>
@@ -126,10 +126,7 @@
         {% endif %}
 
 
-        {% if request.user.is_authenticated %}
-      
-
-        {% if instance and not request.path == '/profile/' %}
+        {% if instance.user_id == request.user.id  and not request.path == '/profile/' %}
     
         {% if not '/edit/' in request.path  %}
         
@@ -148,7 +145,7 @@
        
         {% endif %}
 
-        {% endif %}{% endif %}
+        {% endif %}
 
         <li class="pull-right">
           <a href='{% url "logout" %}'>Logout</a>
@@ -176,7 +173,7 @@
                            <!-- <i class="fa fa-caret-down"></i> -->
                         </a>
                         <a href='{% url "notifications:mark_all_as_read" %}' id="">mark as read</a>
-                        <a href="{% url 'feedback_form:feedback' %}">Feedback form</a>
+                        
                     <ul class="dropdown-content">
                         {% live_notify_list %}
                          
@@ -207,7 +204,7 @@
     ></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/0.3.5/marked.min.js"></script>
 
-    <script>
+    <!-- <script>
       window.onscroll = function() {myFunction()};
       
       var header = document.getElementById("myHeader");
@@ -220,7 +217,7 @@
           header.classList.remove("sticky");
         }
       }
-      </script>
+      </script> -->
     
 
     {% include "footer.html" %}

@@ -81,7 +81,8 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'trydjango19.wsgi.application'
 
-
+STRIPE_PUBLISHABLE_KEY = "pk_test_cpvMsjo2FgaiI5H8H0Y06OuF00j0020LKu"
+STRIPE_TEST_SECRET_KEY = "sk_test_EUwBtaxTiHCm51mDIoiJofmF00PUjmwOo4"
 # Database
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
 
