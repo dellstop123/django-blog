@@ -21,7 +21,7 @@ SECRET_KEY = '=_k=6s&(3^$1godh97db!w9$5y#e^j#2s$n75vxks%a-=n$5vf'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['www.myblogbook.xyz','myblogbook.xyz','blog-book-1.herokuapp.com']
+ALLOWED_HOSTS = ['blog-book-1.herokuapp.com']
 # client = pymongo.MongoClient(
 #     "mongodb+srv://guneet_007:<password>@cluster0-qcsk6.mongodb.net/test?retryWrites=true&w=majority")
 # db = client.test
@@ -281,20 +281,20 @@ CHANNEL_LAYERS = {
     'default': {
         'BACKEND': 'channels_redis.core.RedisChannelLayer',
         'CONFIG': {
-            "hosts": [('www.myblogbook.xyz', 6379)],
+            "hosts": [('blog-book-1.herokuapp.com', 6379)],
 
         },
     },
 }
-# CORS_REPLACE_HTTPS_REFERER = True
-# HOST_SCHEME = "https://"
-# SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-# SECURE_SSL_REDIRECT = True
-# SESSION_COOKIE_SECURE = True
-# CSRF_COOKIE_SECURE = True
-# SECURE_HSTS_INCLUDE_SUBDOMAINS = True
-# SECURE_HSTS_SECONDS = 1000000
-# SECURE_FRAME_DENY = True
+CORS_REPLACE_HTTPS_REFERER = True
+HOST_SCHEME = "https://"
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+SECURE_SSL_REDIRECT = True
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
+SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+SECURE_HSTS_SECONDS = 1000000
+SECURE_FRAME_DENY = True
 
 # CORS_REPLACE_HTTPS_REFERER = False
 # HOST_SCHEME = "http://"
