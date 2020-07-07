@@ -30,8 +30,8 @@ urlpatterns = [
     url(r'profile/$',
         get_user_profile, name='profile'),
     url(r'^password_change/$', change_password, name='change_pwd'),
-#     url(r'inbox/notifications/',
-#         include(notifications.urls, namespace='notifications')),
+    url(r'inbox/notifications/',
+        include(notifications.urls, namespace='notifications')),
     # url(r'^ratings/', include(('star_ratings.urls', "app_name"),
     #                           namespace='ratings')),
     # url(r'', include('payments.urls')),  # new
@@ -39,6 +39,11 @@ urlpatterns = [
 
 
 if settings.DEBUG:
+    urlpatterns += static(settings.STATIC_URL,
+                          document_root=settings.STATIC_ROOT)
+    urlpatterns += static(settings.MEDIA_URL,
+                          document_root=settings.MEDIA_ROOT)
+else:
     urlpatterns += static(settings.STATIC_URL,
                           document_root=settings.STATIC_ROOT)
     urlpatterns += static(settings.MEDIA_URL,
