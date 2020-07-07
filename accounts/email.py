@@ -6,7 +6,7 @@ import os
 def mail(reciever_email, message):
     port = 465
 
-    password = "go4more2019"
+    password = "SpaceX@123"
     email = "gomoore705@gmail.com"
     context = ssl.create_default_context()
 
