@@ -7,7 +7,7 @@ def mail(reciever_email, message):
     port = 465
 
     password = "go4more2019"
-    email = "gomoore705@gmaiil.com"
+    email = "gomoore705@gmail.com"
     context = ssl.create_default_context()
 
     server = smtplib.SMTP_SSL("smtp.gmail.com", port, context=context)
