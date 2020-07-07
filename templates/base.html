@@ -58,7 +58,11 @@
    <script type="text/javascript" src="{% static 'star-ratings/js/dist/star-ratings.min.js' %}"></script>
     
     {% load webpush_notifications %}
-    
+    {% load notifications_tags %} 
+    <script src="{% static 'notifications/notify.js' %}" type="text/javascript"></script> 
+    {% register_notify_callbacks callbacks='fill_notification_list,fill_notification_badge' %} 
+
+    {% notifications_unread as unread_count %}
     {% include "messages_display.html" %}
     
     <style>
