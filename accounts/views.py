@@ -19,8 +19,8 @@ from django.contrib.auth.signals import user_logged_in, user_logged_out
 from social_django.models import UserSocialAuth
 from django.contrib.auth.forms import AdminPasswordChangeForm, PasswordChangeForm
 
-SUBJECT = "New Django Blog Developed by Guneet Singh !"
-TEXT = "Hi! Welcome to Django Blog"
+SUBJECT = "Thanks For Registration!"
+TEXT = "Hi! Welcome to BlogBook.You can create, update and modify your own Blog in this Platform and share this on Facebook Posts."
 message = 'Subject: {}\n\n{}'.format(SUBJECT, TEXT)
 
 
@@ -79,7 +79,7 @@ def change_password(request):
             messages.success(
                 request, 'Your password was successfully updated!')
             SUBJECT = "Password Changed"
-            TEXT = "Your Django-Blog Password has been changed successfully!"
+            TEXT = "Your BlogBook Password has been changed successfully!"
             pwd_message = 'Subject: {}\n\n{}'.format(SUBJECT, TEXT)
             mail(user.email, pwd_message)
             return redirect('/posts/')
