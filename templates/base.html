@@ -161,7 +161,29 @@
         <li class="pull-right">
           <a href='{% url "profile" %}'>Profile</a>
         </li>
-   
+    <!-- Notification -->
+                 {% if unread_count == 0 %}
+                <li class="pull-center">      
+                   <span class="fa fa-globe">Notifications</span>    
+                </li>
+                {% else %}
+                
+                    <li class="dropdown">         
+                          <a href='javascript:void(0);' >
+                           <span class="fa fa-globe" class="dropbtn">Notifications{% live_notify_badge badge_class="badge" %}</span>
+                          
+                        </a>
+                        <a href='{% url "notifications:mark_all_as_read" %}' id="">mark as read</a>
+                        
+                    <ul class="dropdown-content">
+                        {% live_notify_list %}
+                         
+                    </ul>
+                    </li>
+               
+        
+                {% endif %}  
+        <!-- Notification -->
 
         <li class="pull-right">Welcome,{{request.user}}</li>
         {% endif %}
