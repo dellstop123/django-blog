@@ -26,6 +26,7 @@ dj-database-url==0.5.0
 Django==2.2
 django-ad-code==1.0.0
 django-ads==1.1.1
+django-googledrive-storage==1.5.1
 django-anonymous-notification==1.2.1
 django-appconf==1.0.4
 django-braces==1.14.0
