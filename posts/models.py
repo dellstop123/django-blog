@@ -20,6 +20,9 @@ import datetime
 from comment.models import Comment
 
 from .utils import get_read_time
+from gdstorage.storage import GoogleDriveStorage
+# Define Google Drive Storage
+gd_storage = GoogleDriveStorage()
 
 
 class PostManager(models.Manager):
@@ -39,8 +42,8 @@ class Post(models.Model):
                              default=1, on_delete=models.CASCADE)
     title = models.CharField(max_length=120)
     slug = models.SlugField(unique=True)
-    image = models.ImageField(upload_to=upload_location,
-                              null=True, blank=True, width_field="width_field", height_field="height_field")
+    image = models.FileField(upload_to='posts/',
+                             storage=gd_storage)
     height_field = models.IntegerField(default=0)
     width_field = models.IntegerField(default=0)
     content = models.TextField()
@@ -150,8 +153,8 @@ class Preference(models.Model):
 
 class Images(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
-    image = models.ImageField(upload_to=upload_location,
-                              null=True, blank=True, width_field="width_field", height_field="height_field")
+    image = models.FileField(upload_to='images/',
+                             storage=gd_storage)
     # multiple_img = models.FileField(upload_to=upload_location)
     height_field = models.IntegerField(default=0)
     width_field = models.IntegerField(default=0)
