@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "computergeeks",
+  "private_key_id": "38ac0bbfdfcbd21eac88a800fe67cf9cb976e081",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDArIiPcclr/jbL\n4cEDThoA8YnlShSSLKWCslQEzbvYapcfhIiT7FnaAJmbCTnd5pjWyBurMfeG1Kpo\nKtfhsAu1SUZsRCjR/T5I1jDHh7c/oNG+S4IDR1Mx2tH4mtP46k5RlbKplqXu+dUR\nldSnGn0HKQWM6EHi8Mj4yGmkEuOr8SIpRqlc90zDQMKOTOua0ZtnYvrNNARSADb9\n2z3wNXBr5I5ieSdl9wdWumsjNyixhp1aO/QnBL9ABKNj2FTjsG3P1Tot42U60/CK\nsczui4qnu6+KYcealet63Nkhs55T/BlkQS+P4qfY9sclU5kGNRzpmo3WxQpGfnLo\nmS9IOigzAgMBAAECggEAJn7SUgaj/cWu4RFb5PMn0uRvbrZcYdA1yWUj0EnirByv\n0QZD23ovgZT5G7a+Lw2xn8gfbxbuo6u92E4nD9qCnFflkCAWH85/MUJKQLNm83mI\nLoMbmNgZUS6tIQSeMW9u8nH8XlHRGWwlG/xZnoF2VYXmq/6Dm3oMTViNctCrWGDe\ndK297BfaankceZ1KVlLPoKl8szJ8PKjU47Xcf5h2ZCAZeCJcnqfnEVLHwPIdTcyh\nLG45dUINZoRTs6kqD8hpFgWaRGncMGUuhCFpGBfzpWaE/L2Tw2Ji/mpX8dOOaveM\n0O41fhx4J7y7raJY88rWPPZs0HPWg8OYJpUBl4hxQQKBgQDijqs8S3QGJKUf1fkC\nkD8cgLjZZNfl4FLeXH3W+CQvWLfDV1tYFykxeRP5f7XW+LAb+lbs6Qv5kyvZP1ph\nihjI80kjpLhotZ5/OQqB/Ywnlke+Pqn28dO8xUsDdMaKX42Zye/S3eBT+88JP5fc\nDsz2569Ez+bw5rPgiWJeC49j4wKBgQDZtpmnm230k9M4T0P/LjXxSMnaxrqFnI0O\nj48Ough035cKdkxJhTlA8SA5pnC8MrhCtnBZt9KijPHth60w6rqzjixwbkNpzhti\nCyd73hdIh9mjk2F34Q/y3iGa8O8bQbKUPTw9IkV11uGuwf5lOBXgpQoGETeBlqYr\nacnCQBt7cQKBgEr9yIZrv1rtNE8mZ4dGse1AWm9zJtereiKqYOkQOAIIDsO1HcI5\n4GPE3Sy/7jPbG4gXREClH1acNW5yvvr8WBnkFbibpILcYztfaS//+i18XAEIAwB/\nqYOZlqvtMm7JFDjsk9qroL6L4ksAZsbri0LLC8PuQVZKNw5Cy3Gvx+XbAoGBAJlZ\nhy2Jy49kuHiHTKvnjtNfo97X7/XA6ZKCCBAldWNtQmR6Iw3+Ku/VaA9zbyEA0M0c\n2FI5qsIYaSgYUyOLkup6kE65O/7A0ITkunEDZH8QQXp4i0T3YFZ/pEgQwTr/sZu8\n7jtZcneoXdrMhjYhpTdQyJixc9lxlaYqo5SRt0nhAoGAaIcuJC8t97irUjl+BmwX\nouq3vpb+6bbJWFQ+QDwD8baAIVg4cWGMEHvHf8lkGbHCiD7ptn3OxVpyFzzS4TJs\nPCzO+C5TOl3lOsCRWfm+iaIAWMlHcsgr+2Ku2F4q3BW0hDGqJeJmE5+3rKS2UZxq\nOBUJZh2iqQEGQbqY+KzIzxk=\n-----END PRIVATE KEY-----\n",
+  "client_email": "computer-geeks@computergeeks.iam.gserviceaccount.com",
+  "client_id": "104271176529759863044",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/computer-geeks%40computergeeks.iam.gserviceaccount.com"
+}
