@@ -92,11 +92,11 @@ $(document).ready(function () {
   //    let socket = new WebSocket(`ws://127.0.0.1:8000/?session_key=${sessionKey}`);
   if (window.location.protocol == "https:") {
     var socket = new WebSocket(
-      "wss://" + window.location.host + "/wss?session_key=${sessionKey}"
+      "wss://myblogbook.xyz/wss?session_key=${sessionKey}"
     );
   } else {
     var socket = new WebSocket(
-      "ws://" + window.location.host + "/ws?session_key=${sessionKey}"
+      "ws://myblogbook.xyz/ws?session_key=${sessionKey}"
     );
   }
 
