@@ -41,7 +41,7 @@ class Post(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL,
                              default=1, on_delete=models.CASCADE)
     title = models.CharField(max_length=120)
-    slug = models.SlugField(unique=True)
+    slug = models.SlugField(unique=True,max_length=255)
     image = models.FileField(upload_to='posts/',
                              storage=gd_storage)
     height_field = models.IntegerField(default=0)
