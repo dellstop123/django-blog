@@ -193,16 +193,12 @@ STRIPE_LIVE_MODE = False  # Change to True in production
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
+        'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'pythonlogin',
         'USER': 'root',
         'PASSWORD': '',
         'HOST': 'localhost',
         'PORT': '3306',
-        'OPTIONS': {
-            'init_command': 'SET innodb_strict_mode=1',
-        },
-
     }
 }
 # Application definition
