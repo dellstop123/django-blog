@@ -214,7 +214,7 @@ REST_FRAMEWORK = {
         'rest_framework.pagination.LimitOffsetPagination',
     'PAGE_SIZE': 100
 }
-MESSAGES_TO_LOAD = 15
+MESSAGES_TO_LOAD = 50
 
 CHANNEL_LAYERS = {
     "default": {
@@ -282,9 +282,9 @@ CHANNEL_LAYERS = {
     "default": {
         "BACKEND": "channels_redis.core.RedisChannelLayer",
         "CONFIG": {
-            "hosts": [os.environ.get('REDIS_URL', 'redis://localhost:6379')],
-        },
-        "symmetric_encryption_keys": [SECRET_KEY],
+            "hosts": ["redis://h:pf56c6e4a9a2dfd07ce062c3c43c6de7f104ac8c91025030cedde72639298a1d3@ec2-54-162-237-83.compute-1.amazonaws.com:25179"],
+            "symmetric_encryption_keys": [SECRET_KEY],
+        },       
     },
 }
 CORS_REPLACE_HTTPS_REFERER = True
