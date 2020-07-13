@@ -64,7 +64,7 @@ function sendMessage(recipient, body) {
     recipient: recipient,
     body: body,
   }).fail(function () {
-    alert("Error! Check console!");
+    
   });
 }
 
