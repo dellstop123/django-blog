@@ -19,7 +19,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(
 SECRET_KEY = '=_k=6s&(3^$1godh97db!w9$5y#e^j#2s$n75vxks%a-=n$5vf'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['blog-book-1.herokuapp.com','www.myblogbook.xyz','myblogbook.xyz']
 # client = pymongo.MongoClient(
