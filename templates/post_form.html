@@ -15,7 +15,7 @@
     Form
   </h1>
   <form method="POST" action="" enctype="multipart/form-data">
-    {% csrf_token %} {{form|crispy }}
+    {% csrf_token %} {{ form.as_p |safe}}
     <input type="submit" class="btn btn-primary" value="Create Post" />
   </form>
 
