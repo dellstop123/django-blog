@@ -12,6 +12,8 @@ from django.core.cache import cache
 from django.contrib.auth.models import User
 from django.db.models.signals import pre_save
 from django.utils.safestring import mark_safe
+from ckeditor.fields import RichTextField
+from tinymce.models import HTMLField
 # from django.utils.text import slugify
 from django.template.defaultfilters import slugify
 # Create your models here.
@@ -46,7 +48,7 @@ class Post(models.Model):
                              storage=gd_storage)
     height_field = models.IntegerField(default=0)
     width_field = models.IntegerField(default=0)
-    content = models.TextField()
+    content = RichTextField()
     draft = models.BooleanField(default=False)
     publish = models.DateField(auto_now=False, auto_now_add=False)
     # models.TimeField(null=True, blank=True) #assume minutes
