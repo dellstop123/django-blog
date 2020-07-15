@@ -9,6 +9,7 @@ from accounts.views import (
     login_view, register_view, logout_view, change_password, setting, password)
 from posts.views import (posts_create, posts_delete,
                          posts_update, about, contact, get_user_profile, posts_list, post_image, display_image)
+from django.contrib.sitemaps.views import sitemap
 from trydjango19.sitemap import StaticViewSitemap
 sitemaps = {
     'static': StaticViewSitemap
