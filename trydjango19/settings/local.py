@@ -58,6 +58,9 @@ INSTALLED_APPS = [
     'notifications',
     'star_ratings',
     'gdstorage',
+    'ckeditor',
+    'ckeditor_uploader',
+    'tinymce',
     # local apps
     'comment',
     'posts',
@@ -272,6 +275,15 @@ STATICFILES_DIRS = [
 
 # STATICFILES_STORAGE = 'trydjango19.storage.S3Storage'
 GOOGLE_DRIVE_STORAGE_JSON_KEY_FILE = os.path.join(BASE_DIR, 'key.json')
+
+CKEDITOR_UPLOAD_PATH = 'uploads/'
+CKEDITOR_IMAGE_BACKEND = "pillow"
+
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': None,
+    },
+}
 
 STATIC_ROOT = os.path.join(
     BASE_DIR, "static_cdn")
