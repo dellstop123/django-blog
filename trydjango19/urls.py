@@ -1,5 +1,6 @@
 from django.conf.urls import include, url
 from django.conf import settings
+from django.http import HttpResponse
 from django.conf.urls.static import static
 from django.contrib import admin
 import notifications.urls
@@ -39,6 +40,8 @@ urlpatterns = [
     url(r'inbox/notifications/',
         include(notifications.urls, namespace='notifications')),
     url(r'^sitemap.xml/$', sitemap, {'sitemaps': sitemaps}, name='sitemap'),
+    url(r'^robots.txt', lambda x: HttpResponse(
+        "User-Agent: *\nDisallow:", content_type="text/plain"), name="robots_file"),
     # url(r'^ratings/', include(('star_ratings.urls', "app_name"),
     #                           namespace='ratings')),
     # url(r'', include('payments.urls')),  # new
