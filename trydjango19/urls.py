@@ -9,6 +9,10 @@ from accounts.views import (
     login_view, register_view, logout_view, change_password, setting, password)
 from posts.views import (posts_create, posts_delete,
                          posts_update, about, contact, get_user_profile, posts_list, post_image, display_image)
+from trydjango19.sitemap import StaticViewSitemap
+sitemaps = {
+    'static': StaticViewSitemap
+}
 
 
 urlpatterns = [
@@ -32,6 +36,7 @@ urlpatterns = [
     url(r'^password_change/$', change_password, name='change_pwd'),
     url(r'inbox/notifications/',
         include(notifications.urls, namespace='notifications')),
+    url(r'^sitemap.xml/$', sitemap, {'sitemaps': sitemaps}, name='sitemap'),
     # url(r'^ratings/', include(('star_ratings.urls', "app_name"),
     #                           namespace='ratings')),
     # url(r'', include('payments.urls')),  # new
