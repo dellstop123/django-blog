@@ -5,11 +5,10 @@ from django.utils.safestring import mark_safe
 from .models import Post, Images
 from django.contrib.auth.models import User
 from django.forms import widgets
-
+from ckeditor.widgets import CKEditorWidget
 
 class PostForm(forms.ModelForm):
-    content = forms.CharField(
-        widget=PagedownWidget(attrs={"show_preview": False}))
+    content = forms.CharField(widget=CKEditorWidget())
     publish = forms.DateField(widget=forms.SelectDateWidget)
     # image = forms.ImageField(label='Image')
 
