@@ -10,9 +10,10 @@ from accounts.views import (
 from posts.views import (posts_create, posts_delete,
                          posts_update, about, contact, get_user_profile, posts_list, post_image, display_image)
 from django.contrib.sitemaps.views import sitemap
-from trydjango19.sitemap import StaticViewSitemap
+from trydjango19.sitemap import StaticViewSitemap, SnippetSitemap
 sitemaps = {
-    'static': StaticViewSitemap
+    'static': StaticViewSitemap,
+    'snippet': SnippetSitemap
 }
 
 
