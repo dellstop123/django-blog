@@ -163,7 +163,7 @@ AUTHENTICATION_BACKENDS = (
     'social_core.backends.github.GithubOAuth2',
     'social_core.backends.twitter.TwitterOAuth',
     'social_core.backends.facebook.FacebookOAuth2',
-
+    'social_core.backends.google.GoogleOAuth2',
     'django.contrib.auth.backends.ModelBackend',
 )
 
@@ -176,15 +176,16 @@ SOCIAL_AUTH_GITHUB_SECRET = '289f3d501368724e300e3a06d85fda0d0360d9d5'
 SOCIAL_AUTH_FACEBOOK_KEY = '250301186328137'  # App ID
 SOCIAL_AUTH_FACEBOOK_SECRET = '4e4b269f424cdf871fb00d03a5056286'  # App Secret
 
-SOCIAL_AUTH_LOGIN_ERROR_URL = '/settings/'
-SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/settings/'
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '331655553149-8fbilm514hb7cprger5r0kavum1j914f.apps.googleusercontent.com'  # App ID
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'flpIl_AFmII1S7-aIWz6P4si'
+
+SOCIAL_AUTH_LOGIN_ERROR_URL = '//'
+SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/posts/'
 SOCIAL_AUTH_RAISE_EXCEPTIONS = False
 # Stripe Payment method
 # STRIPE_LIVE_PUBLIC_KEY = os.environ.get("STRIPE_LIVE_PUBLIC_KEY", "<your publishable key>")
 # STRIPE_LIVE_SECRET_KEY = os.environ.get("STRIPE_LIVE_SECRET_KEY", "<your secret key>")
-STRIPE_PUBLISHABLE_KEY = "pk_test_cpvMsjo2FgaiI5H8H0Y06OuF00j0020LKu"
-STRIPE_TEST_SECRET_KEY = "sk_test_EUwBtaxTiHCm51mDIoiJofmF00PUjmwOo4"
-STRIPE_LIVE_MODE = False  # Change to True in production
+
 
 # Database
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
