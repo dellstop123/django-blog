@@ -27,13 +27,13 @@
             </div>
         {% endif %}
 
-        <label for="username" class="sr-only">Username</label>
+        <label for="username" >Username</label>
         <input type="text" id="username" class="form-control"
                name="username" placeholder="Username"
                value="{{ form.username.value|default_if_none:"" }}"
                required autofocus>
 
-        <label for="password" class="sr-only">Password</label>
+        <label for="password" >Password</label>
         <input type="password" id="password" class="form-control"
                name="password" placeholder="Password" required>
 
@@ -49,26 +49,70 @@
     <div style="text-align: center;">
       <p><strong>-- OR --</strong></p>
       <a
-        id="github-button"
-        style="background-color: green;"
-        class="btn btn-primary btn-social btn-github"
-        href="{% url 'social:begin' 'github' %}"
-      >
-        <span class="fa fa-github"></span> Signin with Github
-      </a>
-      <!-- <a href="{% url 'social:begin' 'twitter' %}">Login with Twitter</a><br /> -->
-      <a
-        href="{% url 'social:begin' 'facebook' %}"
-        class="btn btn-primary btn-social btn-facebook"
-      >
-        <span class="fa fa-facebook"></span> Signin with Facebook
-      </a>
-        <a
+      style="
+        font-family: Font Awesome 5 Brands;
+        font-size: 4rem;
+        height: 6rem;
+        width: 6rem;
+        margin-left: 1rem !important;
+        margin-right: 1rem !important;
+        display: inline-flex !important;
+        border-radius: 50% !important;
+        color: #fff;
+        background-color: #333;
+        border-color: #333;
+        align-items: center !important;
+        justify-content: center !important;
+        box-shadow: 0 0.15rem 1.75rem 0 rgba(33, 37, 41, 0.15) !important;
+      "
+      href="{% url 'social:begin' 'github' %}"
+    >
+      <i class="fa fa-github"></i>
+    </a>
+
+    <!-- <a href="{% url 'social:begin' 'twitter' %}">Login with Twitter</a><br /> -->
+    <a
+      style="
+        font-family: Font Awesome 5 Brands;
+        font-size: 4rem;
+        height: 6rem;
+        width: 6rem;
+        margin-left: 1rem !important;
+        margin-right: 1rem !important;
+        display: inline-flex !important;
+        border-radius: 40% !important;
+        color: #fff;
+        background-color: #1da1f2;
+        border-color: #1da1f2;
+        align-items: center !important;
+        justify-content: center !important;
+        box-shadow: 0 0.15rem 1.75rem 0 rgba(33, 37, 41, 0.15) !important;
+      "
+      href="{% url 'social:begin' 'facebook' %}"
+    >
+      <i class="fa fa-facebook"></i>
+    </a>
+
+    <a
+      style="
+        font-family: Font Awesome 5 Brands;
+        font-size: 4rem;
+        height: 6rem;
+        width: 6rem;
+        margin-left: 1rem !important;
+        margin-right: 1rem !important;
+        display: inline-flex !important;
+        border-radius: 50% !important;
+        color: #fff;
+        background-color: #e05964;
+        border-color: #e05964;
+        align-items: center !important;
+        justify-content: center !important;
+        box-shadow: 0 0.15rem 1.75rem 0 rgba(33, 37, 41, 0.15) !important;
+      "
       href="{% url 'social:begin' 'google-oauth2' %}"
-      class="btn btn-primary btn-social btn-google"
-      style="background-color: rgb(199, 27, 27);"
-         >
-      <span class="fa fa-google"></span> Signin with Google
+    >
+      <i class="fa fa-google"></i>
     </a>
     </div>
     {% endif %}
