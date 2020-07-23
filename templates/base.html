@@ -132,6 +132,42 @@
       .dropdown:hover .dropbtn {
         background-color: #3e8e41;
       }
+      
+      nav {
+        /* position: absolute; */
+        /* padding: 3px 10px; */
+        background-color: whitesmoke;
+      }
+      nav ul {
+        list-style: none;
+        padding: 0;
+      }
+      nav > ul > li {
+        display: inline-block;
+        position: relative;
+
+        /* border: 1px solid lightgreen; */
+        /* for demo */
+      }
+      nav a {
+        /* font-weight: 800; */
+        padding: 5px 10px;
+        display: block;
+      }
+      li.subNav {
+        float: inline-end;
+      }
+      nav > ul > li.subNav ul {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        white-space: nowrap;
+        background: whitesmoke;
+      }
+      nav ul li.subNav:hover ul {
+        display: block;
+      }
     </style>
 <script data-ad-client="ca-pub-4547075187895871" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
   </head>
@@ -139,83 +175,114 @@
     <div id="fb-root"></div>
 
     <div class="container" style="width: 100% !important;">
-      <ol class="breadcrumb">
-        <li class="pull-left"><a href='{% url "posts:list" %}'>Home</a></li>
-        {% if not request.user.is_authenticated %}
-        <li class="pull-right">
-          <a href='{% url "register" %}'>Register</a>
-        </li>
-        <li class="pull-right"><a href='{% url "login" %}'>Login</a></li>
-        {% else %} {% if request.path == '/posts/' %}
-        <li class="pull-left">
-          <a href='{% url "create" %}'>Create Blog</a>
-        </li>
-        <li class="pull-left">
-          <a href='{% url "home" %}'>Messages</a>
-        </li>
-        {% endif %}
-        <!--  -->
-        {% if instance.user_id == request.user.id %}
-        <!--  -->
-        {% if not request.path == '/profile/' %}
-        <!--  -->
-        {% if not '/edit/' in request.path %}
+      <div class="" style="width: 100% !important;">
+      <nav>
+        <!-- <h2 style="text-align: center;">
+        Welcome, {{request.user}}
+      </h2> -->
+        <ul>
+          <li class="pull-left">
+            <a href='{% url "posts:list" %}'>Home</a>
+          </li>
+          {% if not request.user.is_authenticated %}
+          <li class="pull-right">
+            <a href='{% url "register" %}'>Register</a>
+          </li>
+          <li class="pull-right"><a href='{% url "login" %}'>Login</a></li>
+          {% else %} {% if request.path == '/posts/' %}
+          <li class="pull-left">
+            <a href='{% url "create" %}'>Create Blog</a>
+          </li>
+          <li class="pull-left">
+            <a href='{% url "home" %}'>Messages</a>
+          </li>
+          {% endif %}
 
-        <li class="pull-center">
-          <a href="{{ request.path }}edit">Edit Blog</a>
-        </li>
-        <li class="pull-center">
-          <a href="{{ request.path }}mul-images">Add Images</a>
-        </li>
-        <li class="pull-center">
-          <a href="{{ request.path }}image">Delete Images</a>
-        </li>
-        <li class="pull-center">
-          <a href="{{ request.path }}delete">Delete Blog</a>
-        </li>
+          <!--  -->
+          {% if instance.user_id == request.user.id %}
+          <!--  -->
+          {% if not request.path == '/profile/' %}
+          <!--  -->
+          {% if not '/edit/' in request.path %}
+          <li class="subNav">
+            <a
+              href="#"
+              class="dropdown-toggle"
+              data-toggle="dropdown"
+              role="button"
+              aria-expanded="false"
+              >Blog Settings <span class="caret"></span
+            ></a>
+            <ul class="dropdown-menu" role="menu">
+              <li class="pull-center">
+                <a href="{{ request.path }}edit">Edit Blog</a>
+              </li>
+              <!-- <li class="pull-center">
+                <a href="{{ request.path }}mul-images">Add Images</a>
+              </li> -->
+              <!-- <li class="pull-center">
+              <a href="{{ request.path }}image">Delete Images</a>
+            </li> -->
+              <li class="pull-center">
+                <a href="{{ request.path }}delete">Delete Blog</a>
+              </li>
+            </ul>
+          </li>
 
-        {% endif %} {% endif %} {% endif %}
-        <li class="pull-right">
-          <a href='{% url "logout" %}'>Logout</a>
-        </li>
-        <li class="pull-right">
-          <a href='{% url "settings" %}'>Settings</a>
-        </li>
-        <li class="pull-right">
-          <a href='{% url "change_pwd" %}'>Change Password</a>
-        </li>
-        <li class="pull-right">
-          <a href='{% url "profile" %}'>Profile</a>
-        </li>
+          {% endif %} {% endif %} {% endif %}
+          <li class="subNav">
+            <a
+              href="#"
+              class="dropdown-toggle"
+              data-toggle="dropdown"
+              role="button"
+              aria-expanded="false"
+              >Settings <span class="caret"></span
+            ></a>
+            <ul class="dropdown-menu" role="menu" style="min-width: 125px;">
+              <!-- Notification -->
+              {% if unread_count == 0 %}
+              <li class="pull-center">
+                <span class="fa fa-globe">Notifications</span>
+              </li>
+              {% else %}
+              <li class="dropdown">
+                <a href="javascript:void(0);">
+                  <span class="fa fa-globe" class="dropbtn"
+                    >Notifications{% live_notify_badge badge_class="badge"
+                    %}</span
+                  >
+                </a>
+                <a href='{% url "notifications:mark_all_as_read" %}' id=""
+                  >mark as read</a
+                >
+                <ul class="dropdown-content">
+                  {% live_notify_list %}
+                </ul>
+              </li>
+              {% endif %}
+              <!-- Notification -->
+              <li class="pull-center">
+                <a href='{% url "change_pwd" %}'>Password</a>
+              </li>
 
-        <!-- Notification -->
-        {% if unread_count == 0 %}
-        <li class="pull-center">
-          <span class="fa fa-globe">Notifications</span>
-        </li>
-        {% else %}
+              <li class="pull-center">
+                <a href='{% url "profile" %}'>Profile</a>
+              </li>
 
-        <li class="dropdown">
-          <a href="javascript:void(0);">
-            <span class="fa fa-globe" class="dropbtn"
-              >Notifications{% live_notify_badge badge_class="badge" %}</span
-            >
-          </a>
-          <a href='{% url "notifications:mark_all_as_read" %}' id=""
-            >mark as read</a
-          >
+              <li class="pull-center">
+                <a href='{% url "settings" %}'>Settings</a>
+              </li>
+              <li class="pull-center">
+                <a href='{% url "logout" %}'>Logout</a>
+              </li>
 
-          <ul class="dropdown-content">
-            {% live_notify_list %}
-          </ul>
-        </li>
-
-        {% endif %}
-        <!-- Notification -->
-
-        <li class="pull-right">Welcome,{{request.user}}</li>
-        {% endif %}
-      </ol>
+              {% endif %}
+            </ul>
+          </li>
+          <!-- <li class="pull-right">Welcome,{{request.user}}</li> -->
+        </ul>
+      </nav>
       {% block content %}{% endblock content %}
     </div>
 
