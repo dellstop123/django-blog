@@ -181,7 +181,7 @@
         Welcome, {{request.user}}
       </h2> -->
         <ul>
-          <li class="pull-left">
+          <li class="pull-center">
             <a href='{% url "posts:list" %}'>Home</a>
           </li>
           {% if not request.user.is_authenticated %}
