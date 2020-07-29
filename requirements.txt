@@ -111,3 +111,4 @@ urllib3==1.25.9
 whitenoise==5.0.1
 zipp==3.1.0
 zope.interface==5.1.0
+django-allauth==0.39.1
