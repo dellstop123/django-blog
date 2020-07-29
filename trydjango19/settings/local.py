@@ -302,6 +302,22 @@ CHANNEL_LAYERS = {
         },       
     },
 }
+
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend'
+)
+# Make it false if you don't need email varfication
+ACCOUNT_EMAIL_VERIFICATION = False
+# Email configurations
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'  # Set your email host
+EMAIL_PORT = 587
+EMAIL_HOST_USER = os.environ.get('email')
+EMAIL_HOST_PASSWORD = os.environ.get('password')  # Your password
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = os.environ.get('email')
+
 # CORS_REPLACE_HTTPS_REFERER = True
 # HOST_SCHEME = "https://"
 # SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
