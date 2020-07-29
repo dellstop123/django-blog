@@ -317,10 +317,10 @@ ACCOUNT_EMAIL_VERIFICATION = False
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'  # Set your email host
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'shearshare055@gmail.com'
-EMAIL_HOST_PASSWORD = 'P@ssw0rd6nge'  # Your password
+EMAIL_HOST_USER = 'gomoore705@gmail.com'
+EMAIL_HOST_PASSWORD = 'SpaceX@123'  # Your password
 EMAIL_USE_TLS = True
-DEFAULT_FROM_EMAIL = 'shearshare055@gmail.com'
+DEFAULT_FROM_EMAIL = 'gomoore705@gmail.com'
 
 # CORS_REPLACE_HTTPS_REFERER = True
 # HOST_SCHEME = "https://"
