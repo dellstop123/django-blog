@@ -1,9 +1,13 @@
 from django.conf.urls import include, url
 from django.conf import settings
+from django.urls import path
 from django.http import HttpResponse
 from django.conf.urls.static import static
 from django.contrib import admin
 import notifications.urls
+from django.contrib.auth.views import (
+    PasswordResetView, PasswordResetDoneView, PasswordResetConfirmView, PasswordResetCompleteView,
+)
 # from django.contrib.auth import views as auth_views
 from django.contrib.auth.models import User
 from accounts.views import (
@@ -42,6 +46,14 @@ urlpatterns = [
     url(r'^sitemap.xml/$', sitemap, {'sitemaps': sitemaps}, name='sitemap'),
     url(r'^robots.txt', lambda x: HttpResponse(
         "User-Agent: *\nDisallow:", content_type="text/plain"), name="robots_file"),
+    path('password_reset/', PasswordResetView.as_view(success_url='done/'),
+         name="password_reset"),
+    path('password_reset/done/', PasswordResetDoneView.as_view(),
+         name="password_reset_done"),
+    path('reset/<uidb64>/<token>/', PasswordResetConfirmView.as_view(
+        success_url='/reset/done/'), name="password_reset_confirm"),
+    path('reset/done/', PasswordResetCompleteView.as_view(),
+         name="password_reset_complete"),
     # url(r'^ratings/', include(('star_ratings.urls', "app_name"),
     #                           namespace='ratings')),
     # url(r'', include('payments.urls')),  # new
