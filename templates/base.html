@@ -5,7 +5,7 @@
       name="viewport"
       content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=yes"
     />
-    <meta name="p:domain_verify" content="dbfbbac652bf9badb30e0ef8697c433a"/>
+    
     <title>
       {% block head_title %}BlogBook{% endblock head_title %}
     </title>
@@ -69,14 +69,7 @@
     <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}" />
     <script src="{% static 'js/jquery.min.js' %}"></script>
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
-    <link
-      rel="stylesheet"
-      href="{% static 'star-ratings/css/star-ratings.css' %}"
-    />
-    <script
-      type="text/javascript"
-      src="{% static 'star-ratings/js/dist/star-ratings.min.js' %}"
-    ></script>
+
     {% load notifications_tags %}
     <script
       src="{% static 'notifications/notify.js' %}"
@@ -89,7 +82,7 @@
     <!--  -->
     {% endblock head_extra %}
     <!--  -->
-    {% load webpush_notifications %}
+
     <!--  -->
     {% notifications_unread as unread_count %}
     <!--  -->
@@ -176,15 +169,13 @@
   </head>
   <body>
     <div id="fb-root"></div>
-
-    <div class="container" style="width: 100% !important;">
       <div class="" style="width: 100% !important;">
       <nav>
         <!-- <h2 style="text-align: center;">
         Welcome, {{request.user}}
       </h2> -->
         <ul>
-          <li class="pull-center">
+          <li class="pull-left">
             <a href='{% url "posts:list" %}'>Home</a>
           </li>
           {% if not request.user.is_authenticated %}
