@@ -70,11 +70,12 @@
 
 
 <p><div class="fb-like" data-href="{{ request.build_absolute_uri }}" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true"></div>
-     <a href="https://www.instagram.com/guneet_singh_007?url=https://www.myblogbook.xyz{{ request.get_full_path|urlencode }}" class="instagram-link" data-share="true"><i class="fa fa-instagram fa-lg"></i></a>
-    <a href="https://www.linkedin.com/shareArticle?url=https://www.myblogbook.xyz{{ request.get_full_path|urlencode }}" class="linkedin-link" data-share="true"><i class="fa fa-linkedin-square fa-lg"></i></a>
+    <script src="https://platform.linkedin.com/in.js" type="text/javascript">lang: en_US</script>
+    <script type="IN/Share" data-url="https://www.myblogbook.xyz{{ request.get_full_path|urlencode }}"></script>
+    <!-- <a href="https://www.instagram.com/guneet_singh_007?url=https://www.myblogbook.xyz{{ request.get_full_path|urlencode }}" class="instagram-link" data-share="true"><i class="fa fa-instagram fa-lg"></i></a> -->
     <a class="tumblr-share-button" data-color="blue" data-notes="right" href="https://embed.tumblr.com/share"></a> 
     <script>!function(d,s,id){var js,ajs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://assets.tumblr.com/share-button.js";ajs.parentNode.insertBefore(js,ajs);}}(document, "script", "tumblr-js");</script>
-    <a href="https://www.reddit.com/submit?url=https://www.myblogbook.xyz{{ request.get_full_path|urlencode }}" class="reddit-link" data-share="true"><i class="fa fa-reddit-square fa-lg" aria-hidden="true"></i></a>
+    <a href="https://www.reddit.com/submit?url=https://www.myblogbook.xyz{{ request.get_full_path|urlencode }}" class="reddit-link" data-share="true"><i class="fa fa-reddit-square" aria-hidden="true"></i></a>
 <hr/>
 </p>
 <p>
