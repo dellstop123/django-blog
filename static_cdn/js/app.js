@@ -96,7 +96,7 @@ $(document).ready(function () {
 //     )
 //   } else {
     var socket = new WebSocket(
-      "ws://" + window.location.host + "/ws?session_key=${sessionKey}"
+      "wss://" + window.location.host + "/wss?session_key=${sessionKey}"
     );
 //   }
 
