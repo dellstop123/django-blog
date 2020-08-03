@@ -90,15 +90,16 @@ $(document).ready(function () {
   disableInput();
 
   //    let socket = new WebSocket(`ws://127.0.0.1:8000/?session_key=${sessionKey}`);
-//   if (window.location.protocol == "https:") {
-//     var socket = new WebSocket(
-//       "wss://" + window.location.host + "/wss?session_key=${sessionKey}"
-//     )
-//   } else {
+  if (window.location.protocol == "https:") {
+    var socket = new WebSocket(
+      "wss://" + window.location.host + "/wss?session_key=${sessionKey}"
+    )
+  } else {
     var socket = new WebSocket(
       "wss://" + window.location.host + "/wss?session_key=${sessionKey}"
     );
-//   }
+  }
+  console.log(socket);
 
   chatInput.keypress(function (e) {
     if (e.keyCode == 13) chatButton.click();
