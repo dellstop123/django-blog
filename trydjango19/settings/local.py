@@ -62,8 +62,8 @@ INSTALLED_APPS = [
     'ckeditor',
     'ckeditor_uploader',
     'tinymce',
-    'allauth',
-    'allauth.account',
+#     'allauth',
+#     'allauth.account',
     # local apps
     'comment',
     'posts',
