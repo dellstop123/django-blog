@@ -303,7 +303,7 @@ CHANNEL_LAYERS = {
     "default": {
         "BACKEND": "channels_redis.core.RedisChannelLayer",
         "CONFIG": {
-            "hosts": [os.environ.get('REDIS_URL',6379)],
+            "hosts": [os.environ.get('REDIS_URL','redis://localhost:6379')],
 #             "symmetric_encryption_keys": [SECRET_KEY],
         },       
     },
@@ -324,15 +324,15 @@ EMAIL_HOST_PASSWORD = 'SpaceX@123'  # Your password
 EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = 'gomoore705@gmail.com'
 
-# CORS_REPLACE_HTTPS_REFERER = True
-# HOST_SCHEME = "https://"
-# SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-# SECURE_SSL_REDIRECT = True
-# SESSION_COOKIE_SECURE = True
-# CSRF_COOKIE_SECURE = True
-# SECURE_HSTS_INCLUDE_SUBDOMAINS = True
-# SECURE_HSTS_SECONDS = 1000000
-# SECURE_FRAME_DENY = True
+CORS_REPLACE_HTTPS_REFERER = True
+HOST_SCHEME = "https://"
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+SECURE_SSL_REDIRECT = True
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
+SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+SECURE_HSTS_SECONDS = 1000000
+SECURE_FRAME_DENY = True
 
 # CORS_REPLACE_HTTPS_REFERER = False
 # HOST_SCHEME = "http://"
