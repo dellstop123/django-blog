@@ -297,18 +297,18 @@ STATIC_ROOT = os.path.join(
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, "media_cdn")
 
-ASGI_APPLICATION = 'trydjango19.routing.application'
+
 ## Channels Specific
 CHANNEL_LAYERS = {
     "default": {
         "BACKEND": "channels_redis.core.RedisChannelLayer",
         "CONFIG": {
             "hosts": [os.environ.get('REDIS_URL','redis://localhost:6379')],
-#             "symmetric_encryption_keys": [SECRET_KEY],
+            "symmetric_encryption_keys": [SECRET_KEY],
         },       
     },
 }
-
+ASGI_APPLICATION = 'trydjango19.routing.application'
 # AUTHENTICATION_BACKENDS = (
 #     'django.contrib.auth.backends.ModelBackend',
 #     'allauth.account.auth_backends.AuthenticationBackend'
