@@ -93,11 +93,11 @@ $(document).ready(function () {
   if (window.location.protocol == "https:") {
     var socket = new WebSocket(
       "wss://" + window.location.host + "/wss?session_key=${sessionKey}"
-    );
+    )
   } else {
     var socket = new WebSocket(
       "ws://" + window.location.host + "/ws?session_key=${sessionKey}"
-    );
+    )
   }
 
   chatInput.keypress(function (e) {
