@@ -97,7 +97,7 @@ $(document).ready(function () {
 //   } else {
     var socket = new WebSocket(
       "ws://" + window.location.host + "/ws?session_key=${sessionKey}"
-    )
+    );
 //   }
 
   chatInput.keypress(function (e) {
