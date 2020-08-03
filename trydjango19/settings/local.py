@@ -309,10 +309,10 @@ CHANNEL_LAYERS = {
     },
 }
 
-AUTHENTICATION_BACKENDS = (
-    'django.contrib.auth.backends.ModelBackend',
-    'allauth.account.auth_backends.AuthenticationBackend'
-)
+# AUTHENTICATION_BACKENDS = (
+#     'django.contrib.auth.backends.ModelBackend',
+#     'allauth.account.auth_backends.AuthenticationBackend'
+# )
 # Make it false if you don't need email varfication
 ACCOUNT_EMAIL_VERIFICATION = False
 # Email configurations
