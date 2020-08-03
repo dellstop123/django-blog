@@ -1,1 +1,1 @@
-web: gunicorn trydjango19.wsgi --log-file - --log-level debug
+web: daphne trydjango19.asgi:application --port $PORT --bind 0.0.0.0
