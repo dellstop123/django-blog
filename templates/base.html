@@ -226,17 +226,7 @@
           </li>
 
           {% endif %} {% endif %} {% endif %}
-          <li class="subNav">
-            <a
-              href="#"
-              class="dropdown-toggle"
-              data-toggle="dropdown"
-              role="button"
-              aria-expanded="false"
-              >Settings <span class="caret"></span
-            ></a>
-            <ul class="dropdown-menu" role="menu" style="min-width: 125px;">
-              <!-- Notification -->
+                        <!-- Notification -->
               {% if unread_count == 0 %}
               <li >
                 <span class="fa fa-globe">Notifications</span>
@@ -257,6 +247,16 @@
               </li>
               {% endif %}
               <!-- Notification -->
+          <li class="subNav">
+            <a
+              href="#"
+              class="dropdown-toggle"
+              data-toggle="dropdown"
+              role="button"
+              aria-expanded="false"
+              >Settings <span class="caret"></span
+            ></a>
+            <ul class="dropdown-menu" role="menu" style="min-width: 125px;">
               <li >
                 <a href='{% url "change_pwd" %}'>Password</a>
               </li>
