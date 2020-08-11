@@ -1,0 +1,58 @@
+{% extends "base.html" %} {% block content %}
+
+<div class="col-sm-6 col-sm-offset-3" style="background-color: whitesmoke;
+ ">
+<h1 style="text-align: center;" class="col-sm-12">
+    Top Headlines
+  </h1>
+  <form method="GET" action="" class="col-sm-6 col-sm-offset-3">
+    <input
+      class="btn btn-block btn-social btn-search"
+      type="text"
+      name="news_search"
+      placeholder="Search news"
+      value="{{ request.GET.news_search }}"
+    />
+    <input
+      type="submit"
+      value="Search"
+      class="btn btn-block btn-social btn-search"
+    />
+  </form>
+{% if mylist != None %}
+    {% for new, des, i, u in mylist %} 
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="thumbnail" > 
+                <img class="img-responsive" src="{{ i }}" alt="Card image" > 
+                <div class="caption">
+                    <h4 class="card-title"><strong>{{ new }}</strong></h4>  
+                    <!-- <h4>Published At: {{ d}}</h4> -->
+                    <p class="card-text">{{ des }}</p>
+                    <a href="{{u}}" target="_blank" class="btn btn-primary">Read More</a>        
+                </div>
+                <br>
+            </div>
+     </div></div>
+    {% endfor %} 
+
+    {% else %}
+
+      <div class="row">
+
+         <div class="col-sm-12">
+          <div class="thumbnail" > 
+              <div class="caption">
+                  <h4 class="card-title"><strong>There is no top headlines regarding this search</strong></h4>  
+      
+              </div>
+              <br>
+              <br>
+              <br>
+          </div>
+   </div>
+      </div>
+      {% endif %}
+  </div>
+
+{% endblock content %}
