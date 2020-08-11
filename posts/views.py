@@ -20,8 +20,37 @@ try:
     from django.urls import reverse
 except ImportError:
     from django.core.urlresolvers import reverse
-
+from newsapi import NewsApiClient
 # Create your views here.
+
+
+def index(request):
+    if request.method == 'GET':
+        search = request.GET.get('news_search')
+    newsapi = NewsApiClient(api_key='494715a553904bed82706d32450566a8')
+    top = newsapi.get_top_headlines(sources=search)
+
+    l = top['articles']
+    desc = []
+    news = []
+    img = []
+    url = []
+    date = []
+    name = []
+    for i in range(len(l)):
+        f = l[i]
+        news.append(f['title'])
+        desc.append(f['description'])
+        img.append(f['urlToImage'])
+        url.append(f['url'])
+        # date.append(f['publishedAt'])
+
+    mylist = zip(news, desc, img, url)
+
+    return render(request, 'news.html', context={"mylist": mylist})
+
+
+
 
 
 def post_image(request, slug=None):
