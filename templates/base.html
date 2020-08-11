@@ -169,14 +169,11 @@
   <body>
     <div id="fb-root"></div>
       <div class="" style="width: 100% !important;">
-      <nav>
-        <!-- <h2 style="text-align: center;">
-        Welcome, {{request.user}}
-      </h2> -->
+      <nav style="text-align: center;">
         <ul class="menu">
-            <section style="text-align: center;">
+            <section style="text-align: center;background-color: steelblue;size: 20rem;">
           <span class="user">
-           {% if request.user.is_authenticated %} <strong>Hello {{ request.user }}</strong>{% endif %}
+           {% if request.user.is_authenticated %} <strong style="color: white;">Hello {{ request.user }}</strong>{% endif %}
           </span>
             </section>
           <li >
@@ -237,15 +234,15 @@
                 <span class="fa fa-globe">Notifications</span>
               </li>
               {% else %}
-              <li class="dropdown">
-                <a href="javascript:void(0);">
-                  <span class="fa fa-globe" class="dropbtn"
+              <li class="pull-center">
+                <a href='{% url "notifications:mark_all_as_read" %}'>
+                  <span class="fa fa-globe" 
                     >Notifications{% live_notify_badge badge_class="badge" %}</span
                   >
                 </a>
-                <a href='{% url "notifications:mark_all_as_read" %}' id=""
+<!--                 <a href='{% url "notifications:mark_all_as_read" %}' id=""
                   >mark as read</a
-                >
+                > -->
                 <ul class="dropdown-content">
                   {% live_notify_list %}
                 </ul>
