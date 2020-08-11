@@ -41,8 +41,7 @@
     <link rel="stylesheet" href='{% static "css/modal.css" %}' />
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-172678140-1"></script>
-    
-    <script data-ad-client="ca-pub-4859170279079937" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+   
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
@@ -174,20 +173,23 @@
         <!-- <h2 style="text-align: center;">
         Welcome, {{request.user}}
       </h2> -->
-        <ul>
-          <li class="pull-center">
+        <ul class="menu">
+          <span class="user">
+           {% if request.user.is_authenticated %} <strong>Hello {{ request.user }}</strong>{% endif %}
+          </span>
+          <li >
             <a href='{% url "posts:list" %}'>Home</a>
           </li>
           {% if not request.user.is_authenticated %}
-          <li class="pull-right">
+          <li >
             <a href='{% url "register" %}'>Register</a>
           </li>
-          <li class="pull-right"><a href='{% url "login" %}'>Login</a></li>
+          <li ><a href='{% url "login" %}'>Login</a></li>
           {% else %} {% if request.path == '/posts/' %}
-          <li class="pull-left">
+          <li >
             <a href='{% url "create" %}'>Create Blog</a>
           </li>
-          <li class="pull-left">
+          <li >
             <a href='{% url "home" %}'>Messages</a>
           </li>
           {% endif %}
@@ -208,7 +210,7 @@
               >Blog Settings <span class="caret"></span
             ></a>
             <ul class="dropdown-menu" role="menu">
-              <li class="pull-center">
+              <li >
                 <a href="{{ request.path }}edit">Edit Blog</a>
               </li>
               <!-- <li class="pull-center">
@@ -217,7 +219,7 @@
               <!-- <li class="pull-center">
               <a href="{{ request.path }}image">Delete Images</a>
             </li> -->
-              <li class="pull-center">
+              <li >
                 <a href="{{ request.path }}delete">Delete Blog</a>
               </li>
             </ul>
@@ -236,7 +238,7 @@
             <ul class="dropdown-menu" role="menu" style="min-width: 125px;">
               <!-- Notification -->
               {% if unread_count == 0 %}
-              <li class="pull-center">
+              <li >
                 <span class="fa fa-globe">Notifications</span>
               </li>
               {% else %}
@@ -255,18 +257,18 @@
               </li>
               {% endif %}
               <!-- Notification -->
-              <li class="pull-center">
+              <li >
                 <a href='{% url "change_pwd" %}'>Password</a>
               </li>
 
-              <li class="pull-center">
+              <li >
                 <a href='{% url "profile" %}'>Profile</a>
               </li>
 
-              <li class="pull-center">
+              <li >
                 <a href='{% url "settings" %}'>Settings</a>
               </li>
-              <li class="pull-center">
+              <li >
                 <a href='{% url "logout" %}'>Logout</a>
               </li>
 
