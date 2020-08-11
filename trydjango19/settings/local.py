@@ -121,7 +121,8 @@ MIDDLEWARE = [
     'social_django.middleware.SocialAuthExceptionMiddleware',
     'online_users.middleware.OnlineNowMiddleware',
 ]
-LOGIN_URL = "/login/"
+LOGIN_URL = "login"
+LOGOUT_URL = 'logout'
 ROOT_URLCONF = 'trydjango19.urls'
 
 TEMPLATES = [
@@ -182,7 +183,7 @@ SOCIAL_AUTH_FACEBOOK_SECRET = '4e4b269f424cdf871fb00d03a5056286'  # App Secret
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '331655553149-8fbilm514hb7cprger5r0kavum1j914f.apps.googleusercontent.com'  # App ID
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'flpIl_AFmII1S7-aIWz6P4si'
 
-SOCIAL_AUTH_LOGIN_ERROR_URL = '//'
+SOCIAL_AUTH_LOGIN_ERROR_URL = '/'
 SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/posts/'
 SOCIAL_AUTH_RAISE_EXCEPTIONS = False
 # Stripe Payment method
