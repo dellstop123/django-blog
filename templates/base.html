@@ -174,9 +174,11 @@
         Welcome, {{request.user}}
       </h2> -->
         <ul class="menu">
+            <section style="text-align: center;">
           <span class="user">
            {% if request.user.is_authenticated %} <strong>Hello {{ request.user }}</strong>{% endif %}
           </span>
+            </section>
           <li >
             <a href='{% url "posts:list" %}'>Home</a>
           </li>
