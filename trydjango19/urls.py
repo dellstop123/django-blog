@@ -12,7 +12,7 @@ from django.contrib.auth.views import (
 from django.contrib.auth.models import User
 from accounts.views import (
     login_view, register_view, logout_view, change_password, setting, password)
-from posts.views import (posts_create, posts_delete,
+from posts.views import (posts_create, posts_delete, index,
                          posts_update, about, contact, get_user_profile, posts_list, post_image, display_image)
 from django.contrib.sitemaps.views import sitemap
 from trydjango19.sitemap import StaticViewSitemap, SnippetSitemap
@@ -54,6 +54,7 @@ urlpatterns = [
         success_url='/reset/done/'), name="password_reset_confirm"),
     path('reset/done/', PasswordResetCompleteView.as_view(),
          name="password_reset_complete"),
+    url(r'^api/v1/news/$', index, name='news'),
     # url(r'^ratings/', include(('star_ratings.urls', "app_name"),
     #                           namespace='ratings')),
     # url(r'', include('payments.urls')),  # new
