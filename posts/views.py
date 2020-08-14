@@ -22,9 +22,11 @@ except ImportError:
     from django.core.urlresolvers import reverse
 from newsapi import NewsApiClient
 import redis
+import os
 
+REDIS_URL = os.environ.get('REDIS_URL')
 
-r = redis.Redis(host='localhost', port=6379, db=0)
+r = redis.Redis(host=REDIS_URL, port=6379, db=0)
 # Create your views here.
 
 
