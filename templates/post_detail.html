@@ -58,7 +58,7 @@
 
             
 <h1 style="word-wrap: break-word;">{{ title }} <small>{% if instance.draft %}<span style='color:red;'>Draft</span> {% endif %}{{ instance.publish }}</small></h1>
-
+<span >{{ total_views }} view{{ total_views|pluralize }}</span>
 <!-- {% if instance.read_time|time:"i" <= "01" %} < 1 minute {% else %}{{ instance.read_time|time:"i" }} minutes {% endif %} -->
 
 
