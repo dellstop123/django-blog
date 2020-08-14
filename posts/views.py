@@ -24,11 +24,11 @@ from newsapi import NewsApiClient
 import redis
 import os
 
-Host = os.environ.get('HOST')
+host = os.environ.get('HOST')
 port = os.environ.get('port')
-pass = os.environ.get('password')
+password = os.environ.get('password')
 
-r = redis.Redis(host=Host, port=port,password=pass, db=0)
+r = redis.Redis(host=host, port=port,password=password, db=0)
 # Create your views here.
 
 
