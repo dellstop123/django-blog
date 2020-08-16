@@ -1,11 +1,5 @@
 {% extends "base.html" %} {% load crispy_forms_tags %} {% block content %}
 
-<style>
-  body {
-    /* background-color: #d9edf7; */
-    background-image: url("https://insights.dice.com/wp-content/uploads/2017/09/shutterstock_315465929.jpg");
-  }
-</style>
 <class class="col-sm-6 col-sm-offset-3">
   <h1>{{ title }}</h1>
 
@@ -14,6 +8,9 @@
   
     <form method="POST" action="" enctype="multipart/form-data">
       {% csrf_token %} {{ form|crispy }}
+      {% if form1 %}
+            {{ form1|crispy }}
+      {% else %} &nbsp; {% endif %}
       <input
         type="submit"
         class="btn btn-primary btn-lg btn-block"
