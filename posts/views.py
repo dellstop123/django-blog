@@ -3,14 +3,14 @@ from django.contrib import messages
 from django.utils import timezone
 from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import Post, User, Preference, Images
+from .models import Post, User, Preference, Images,AddUserProfile
 from .admin import PostModelAdmin
 from django.contrib import admin
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib.contenttypes.models import ContentType
-from .forms import PostForm, ProfileForm, PasswordForm, ImageForm
+from .forms import PostForm, ProfileForm, PasswordForm, ImageForm,AddUserProfileForm
 from django.db.models import Q
 from accounts.views import login_view, logout_view
 from comment.forms import CommentForm
@@ -293,23 +293,38 @@ def contact(request):
     return render(request, "about.html")
 
 
+@login_required
 def get_user_profile(request):
     instance = User.objects.get(pk=request.user.id)
-    form = ProfileForm(request.POST or None,
-                       request.FILES or None, instance=instance)
-    if form.is_valid():
-        data = form.save(commit=False)
-        data.user = request.user
-        data.save()
-        messages.success(request, "Successfully Updated",
-                         extra_tags='html_safe')
-        return HttpResponseRedirect('/profile/')
+    profile = None
+    try:
+        profile = AddUserProfile.objects.get(user_id=request.user.id)
+    except:
+        pass
+    if request.method == 'POST':
+        form = ProfileForm(request.POST or None, instance=instance)
+        form1 = AddUserProfileForm(request.POST or None,
+                                   request.FILES or None, instance=profile)
+        if form.is_valid() and form1.is_valid():
+            data = form.save(commit=False)
+            data.user = request.user
+            data.save()
+            form1.save()
+
+            messages.success(request, "Successfully Updated",
+                             extra_tags='html_safe')
+            return HttpResponseRedirect('/profile/')
+    else:
+        form = ProfileForm(instance=instance)
+        form1 = AddUserProfileForm(
+            request.FILES or None, instance=profile)
     context = {
         "title": "Update Profile",
         "form": form,
+        "form1": form1,
         "instance": instance,
     }
-    return render(request, "form.html", context)
+    return render(request, "profile.html", context)
 
 
 @login_required
@@ -403,3 +418,21 @@ def display_image(request, slug=None):
         "image": image,
     }
     return render(request, "delete_image.html", context)
+
+def profilescreen(request):
+    instance = User.objects.get(pk=request.user.id)
+    profile = None
+    posts = None
+    try:
+        profile = AddUserProfile.objects.get(user_id=request.user.id)
+        posts = Post.objects.filter(user_id=request.user.id)
+
+    except:
+        pass
+    context = {
+        "title": "User Post",
+        "profile": profile,
+        "instance": instance,
+        "posts": posts,
+    }
+    return render(request, 'profilescreen.html', context)
