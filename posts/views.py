@@ -3,14 +3,14 @@ from django.contrib import messages
 from django.utils import timezone
 from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import Post, User, Preference, Images,AddUserProfile
+from .models import Post, User, Preference, Images, AddUserProfile
 from .admin import PostModelAdmin
 from django.contrib import admin
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib.contenttypes.models import ContentType
-from .forms import PostForm, ProfileForm, PasswordForm, ImageForm,AddUserProfileForm
+from .forms import PostForm, ProfileForm, PasswordForm, ImageForm, AddUserProfileForm
 from django.db.models import Q
 from accounts.views import login_view, logout_view
 from comment.forms import CommentForm
@@ -425,7 +425,6 @@ def profilescreen(request):
     try:
         profile = AddUserProfile.objects.get(user_id=request.user.id)
         posts = Post.objects.filter(user_id=request.user.id)
-
     except:
         pass
     context = {
