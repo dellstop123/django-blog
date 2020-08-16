@@ -117,12 +117,14 @@ def pre_save_post_reciever(sender, instance, *args, **kwargs):
 pre_save.connect(pre_save_post_reciever, sender=Post)
 
 
-class User(models.Model):
-    username = models.CharField(max_length=120)
-    email = models.EmailField()
-    first_name = models.CharField(max_length=120)
-    last_name = models.CharField(max_length=120)
-    isStaff = models.BooleanField()
+class AddUserProfile(models.Model):
+    user = models.ForeignKey(User,
+                             default=1, on_delete=models.CASCADE)
+    bio = models.CharField(max_length=255)
+    image = models.ImageField(
+        upload_to='profile_image/', storage=gd_storage, blank=True)
+    updated = models.DateTimeField(auto_now=True, auto_now_add=False)
+    timestamp = models.DateTimeField(auto_now=False, auto_now_add=True)
     # password = models.CharField(max_length=120)
 
     def last_seen(self):
@@ -141,7 +143,7 @@ class User(models.Model):
 
 
 class Preference(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(AddUserProfile, on_delete=models.CASCADE)
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
     value = models.IntegerField()
     date = models.DateTimeField(auto_now=True)
