@@ -1,0 +1,77 @@
+{% extends "base.html" %} {% load crispy_forms_tags %} {% block content %}
+
+
+	<div class="row">
+		<div class="col-md-offset-2 col-md-8 col-lg-offset-3 col-lg-6">
+        
+            
+            <div class="col-sm-12">
+                <div class="col-xs-12 col-sm-8">
+                    <h2>{% if instance  %} {{instance.first_name}} {{instance.last_name}} {% endif %}</h2>
+                    <p><strong>Username: </strong> {{instance.username}} </p>
+                    <p><strong>Email: </strong> {{instance.email}} </p>
+                    <p><strong>Bio: </strong> {% if profile.bio  %}{{profile.bio}} {% else %} &nbsp; {% endif %} </p>
+                </div>             
+                <div class="col-xs-12 col-sm-4 text-center">
+                   
+                    <figure >
+                        <img {% if profile.image %} src="{{ profile.image.url }}" {% else %} src="https://klr.ac.in/wp-content/uploads/2015/11/dummy-user-1-200x200.jpg" {% endif %} alt="" class="img-circle img-responsive">
+                        <a class = "image" id = "image" href='{% url "profile" %}'>Edit Photo</a>
+                    </figure>
+                
+                </div>
+            </div>
+        
+            <div class="col-xs-12 divider text-center">
+                <div class="col-xs-12 col-sm-4 emphasis">
+                    <!-- <h2><strong> 20,7K </strong></h2>                    
+                    <p><small>Followers</small></p> -->
+                </div>
+                <div class="col-xs-12 col-sm-4 emphasis">
+                    <!-- <h2><strong>245</strong></h2>                    
+                    <p><small>Following</small></p> -->
+                <button onclick="location.href='/profile/';" class="btn btn-info btn-block"><span class="fa fa-user"></span> Edit Profile </button>
+                </div>
+                <div class="col-xs-12 col-sm-4 emphasis">
+                    <!-- <h2><strong>43</strong></h2>                    
+                    <p><small>Snippets</small></p> -->
+
+                </div>
+            </div>
+    	 </div>                 
+		</div>
+<hr>
+<h1 style="text-align: center;">{{title}}</h1>
+<div class="container">
+<div class="row" >
+
+{% if posts %}
+{% for post in posts %}
+<div class="col-sm-4" style="border-color: black;">
+    <div class="card" >
+      {% if post.image %}
+      <img class="card-img-top img-fluid" src="{{ post.image.url }}"  alt="Card image" style="object-fit: cover;width: 100%;height: 15vw;"/>
+      {% endif %}
+      <div class="card-body" >
+        <h4 >
+          <a href="{{ post.get_absolute_url }}" style="word-wrap: break-word;" class="card-link"
+            >{{ post.title|linebreaks|truncatechars:120 }}</a
+          >
+          <small>{{ post.publish }}</small>
+        </h4>      
+      </div>
+    </div>
+</div>
+{% endfor %}
+
+{% else %}
+
+<div >
+    <h2 style="text-align: center;">No Post Yet</h2>
+
+</div> 
+{% endif %}
+</div>
+</div>
+
+{% endblock content %}
