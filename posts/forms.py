@@ -28,7 +28,7 @@ class ProfileForm(forms.ModelForm):
     email = forms.EmailField(label='Email address')
     first_name = forms.CharField()
     last_name = forms.CharField()
-    IsStaff = forms.BooleanField(label='IsStaff')
+#     IsStaff = forms.BooleanField(label='IsStaff')
 
     class Meta:
         model = User
@@ -37,7 +37,7 @@ class ProfileForm(forms.ModelForm):
             'email',
             'first_name',
             'last_name',
-            'IsStaff'
+#             'IsStaff'
         ]
 
 class AddUserProfileForm(forms.ModelForm):
