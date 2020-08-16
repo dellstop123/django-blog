@@ -2,7 +2,7 @@ from django import forms
 from pagedown.widgets import PagedownWidget
 from string import Template
 from django.utils.safestring import mark_safe
-from .models import Post, Images
+from .models import Post, Images,AddUserProfile
 from django.contrib.auth.models import User
 from django.forms import widgets
 from ckeditor.widgets import CKEditorWidget
@@ -40,7 +40,17 @@ class ProfileForm(forms.ModelForm):
             'IsStaff'
         ]
 
+class AddUserProfileForm(forms.ModelForm):
+    bio = forms.CharField()
+    image = forms.ImageField()
 
+    class Meta:
+        model = AddUserProfile
+        fields = [
+            'bio',
+            'image',
+        ]
+        
 class PasswordForm(forms.ModelForm):
     # password = forms.CharField(widget=forms.PasswordInput)
 
