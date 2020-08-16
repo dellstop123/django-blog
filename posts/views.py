@@ -310,7 +310,6 @@ def get_user_profile(request):
             data.user = request.user
             data.save()
             form1.save()
-
             messages.success(request, "Successfully Updated",
                              extra_tags='html_safe')
             return HttpResponseRedirect('/profile/')
