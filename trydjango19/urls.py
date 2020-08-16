@@ -12,7 +12,7 @@ from django.contrib.auth.views import (
 from django.contrib.auth.models import User
 from accounts.views import (
     login_view, register_view, logout_view, change_password, setting, password)
-from posts.views import (posts_create, posts_delete, index,
+from posts.views import (posts_create, posts_delete, index,profilescreen,
                          posts_update, about, contact, get_user_profile, posts_list, post_image, display_image)
 from django.contrib.sitemaps.views import sitemap
 from trydjango19.sitemap import StaticViewSitemap, SnippetSitemap
@@ -40,6 +40,8 @@ urlpatterns = [
     url(r'^contact/$', contact, name='contact'),
     url(r'profile/$',
         get_user_profile, name='profile'),
+    url(r'profilescreen/$',
+        profilescreen, name='userprofile'),
     url(r'^password_change/$', change_password, name='change_pwd'),
     url(r'inbox/notifications/',
         include(notifications.urls, namespace='notifications')),
