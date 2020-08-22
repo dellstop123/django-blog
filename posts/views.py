@@ -135,8 +135,6 @@ def posts_detail(request, slug=None):
     count = Images.objects.filter(post=post_id).count()
     count1 = Post.objects.filter(image=instance.image).count()
     total_count = count + 1
-    print(total_count)
-    print(instance.likes)
     if instance.publish > timezone.now().date() or instance.draft:
         if not request.user.is_staff or not request.user.is_superuser:
             raise Http404
