@@ -294,27 +294,28 @@ def contact(request):
 @login_required
 def get_user_profile(request):
     instance = User.objects.get(pk=request.user.id)
+    print(instance.email)
     profile = None
     try:
         profile = AddUserProfile.objects.get(user_id=request.user.id)
-    except:
+    except Exception as e:
         pass
     if request.method == 'POST':
         form = ProfileForm(request.POST or None, instance=instance)
         form1 = AddUserProfileForm(request.POST or None,
                                    request.FILES or None, instance=profile)
-        if form.is_valid() and form1.is_valid():
-            data = form.save(commit=False)
-            data.user = request.user
+        if form.is_valid() or form1.is_valid():
+            user = form.save()
+            data = form1.save(commit=False)
+            data.user = user
             data.save()
-            form1.save()
             messages.success(request, "Successfully Updated",
                              extra_tags='html_safe')
             return HttpResponseRedirect('/profile/')
     else:
         form = ProfileForm(instance=instance)
-        form1 = AddUserProfileForm(
-            request.FILES or None, instance=profile)
+        form1 = AddUserProfileForm(request.FILES or None, instance=profile)
+
     context = {
         "title": "Update Profile",
         "form": form,
