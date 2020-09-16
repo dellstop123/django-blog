@@ -41,8 +41,8 @@ class ProfileForm(forms.ModelForm):
         ]
 
 class AddUserProfileForm(forms.ModelForm):
-    bio = forms.CharField()
-    image = forms.ImageField()
+#     bio = forms.CharField()
+#     image = forms.ImageField()
 
     class Meta:
         model = AddUserProfile
