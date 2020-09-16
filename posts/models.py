@@ -118,8 +118,7 @@ pre_save.connect(pre_save_post_reciever, sender=Post)
 
 
 class AddUserProfile(models.Model):
-    user = models.ForeignKey(User,
-                             default=1, on_delete=models.CASCADE)
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, primary_key=True, on_delete=models.CASCADE)
     bio = models.CharField(max_length=255)
     image = models.ImageField(
         upload_to='profile_image/', storage=gd_storage, blank=True)
