@@ -141,17 +141,17 @@ class AddUserProfile(models.Model):
             return False
 
 
-class Preference(models.Model):
-    user = models.ForeignKey(AddUserProfile, on_delete=models.CASCADE)
-    post = models.ForeignKey(Post, on_delete=models.CASCADE)
-    value = models.IntegerField()
-    date = models.DateTimeField(auto_now=True)
+# class Preference(models.Model):
+#     user = models.ForeignKey(AddUserProfile, on_delete=models.CASCADE)
+#     post = models.ForeignKey(Post, on_delete=models.CASCADE)
+#     value = models.IntegerField()
+#     date = models.DateTimeField(auto_now=True)
 
-    def __str__(self):
-        return str(self.user) + ':' + str(self.post) + ':' + str(self.value)
+#     def __str__(self):
+#         return str(self.user) + ':' + str(self.post) + ':' + str(self.value)
 
-    class Meta:
-        unique_together = ("user", "post", "value")
+#     class Meta:
+#         unique_together = ("user", "post", "value")
 
 
 class Images(models.Model):
