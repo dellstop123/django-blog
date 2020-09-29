@@ -17,8 +17,6 @@ BASE_DIR = os.path.dirname(os.path.dirname(
 # BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SECURITY WARNING: keep the secret key used in production secret!
 
-SECRET_KEY = '=_k=6s&(3^$1godh97db!w9$5y#e^j#2s$n75vxks%a-=n$5vf'
-
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
@@ -137,13 +135,6 @@ AUTHENTICATION_BACKENDS = (
 
     'django.contrib.auth.backends.ModelBackend',
 )
-
-SOCIAL_AUTH_GITHUB_KEY = '07ba0c07ae435f7fcae1'
-SOCIAL_AUTH_GITHUB_SECRET = '289f3d501368724e300e3a06d85fda0d0360d9d5'
-
-
-SOCIAL_AUTH_FACEBOOK_KEY = '250301186328137'  # App ID
-SOCIAL_AUTH_FACEBOOK_SECRET = '4e4b269f424cdf871fb00d03a5056286'  # App Secret
 
 SOCIAL_AUTH_LOGIN_ERROR_URL = '/settings/'
 SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/settings/'
