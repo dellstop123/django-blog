@@ -25,6 +25,7 @@ from newsapi import NewsApiClient
 import redis
 import os
 
+key  = os.environ.get('NEWS_KEY')
 host = os.environ.get('HOST')
 port = os.environ.get('port')
 password = os.environ.get('password')
@@ -36,7 +37,7 @@ r = redis.Redis(host=host, port=port,password=password, db=0)
 def index(request):
     if request.method == 'GET':
         search = request.GET.get('news_search')
-    newsapi = NewsApiClient(api_key='494715a553904bed82706d32450566a8')
+    newsapi = NewsApiClient(api_key= key)
     top = newsapi.get_top_headlines(sources=search)
 
     l = top['articles']
