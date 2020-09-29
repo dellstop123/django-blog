@@ -16,7 +16,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(
 # BASE_DIR = os.path.dirname((os.path.realpath(__file__)))
 # SECURITY WARNING: keep the secret key used in production secret!
 
-SECRET_KEY = '=_k=6s&(3^$1godh97db!w9$5y#e^j#2s$n75vxks%a-=n$5vf'
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
@@ -171,35 +171,18 @@ AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
 )
 
-SOCIAL_AUTH_GITHUB_KEY = '07ba0c07ae435f7fcae1'
-SOCIAL_AUTH_GITHUB_SECRET = '289f3d501368724e300e3a06d85fda0d0360d9d5'
+SOCIAL_AUTH_GITHUB_KEY = os.environ.get('SOCIAL_AUTH_GITHUB_KEY')
+SOCIAL_AUTH_GITHUB_SECRET = os.environ.get('SOCIAL_AUTH_GITHUB_SECRET')
 
-# SOCIAL_AUTH_TWITTER_KEY = 'cChZNFj6T5R0TigYB9yd1w'
-# SOCIAL_AUTH_TWITTER_SECRET = 'veNRnAWe6inFuo8o2u8SLLZLjolYDmDP7SzL0YfYI'
+SOCIAL_AUTH_FACEBOOK_KEY = os.environ.get('SOCIAL_AUTH_FACEBOOK_KEY')  # App ID
+SOCIAL_AUTH_FACEBOOK_SECRET = os.environ.get('SOCIAL_AUTH_FACEBOOK_SECRET')  # App Secret
 
-SOCIAL_AUTH_FACEBOOK_KEY = '250301186328137'  # App ID
-SOCIAL_AUTH_FACEBOOK_SECRET = '4e4b269f424cdf871fb00d03a5056286'  # App Secret
-
-SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '331655553149-8fbilm514hb7cprger5r0kavum1j914f.apps.googleusercontent.com'  # App ID
-SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'flpIl_AFmII1S7-aIWz6P4si'
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = os.environ.get('SOCIAL_AUTH_GOOGLE_OAUTH2_KEY')  # App ID
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = os.environ.get('SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET')
 
 SOCIAL_AUTH_LOGIN_ERROR_URL = '/'
 SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/posts/'
 SOCIAL_AUTH_RAISE_EXCEPTIONS = False
-# Stripe Payment method
-# STRIPE_LIVE_PUBLIC_KEY = os.environ.get("STRIPE_LIVE_PUBLIC_KEY", "<your publishable key>")
-# STRIPE_LIVE_SECRET_KEY = os.environ.get("STRIPE_LIVE_SECRET_KEY", "<your secret key>")
-
-
-# Database
-# https://docs.djangoproject.com/en/1.9/ref/settings/#databases
-
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-#     }
-# }
 
 DATABASES = {
     'default': {
@@ -321,10 +304,10 @@ ACCOUNT_EMAIL_VERIFICATION = False
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'  # Set your email host
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'gomoore705@gmail.com'
-EMAIL_HOST_PASSWORD = 'SpaceX@123'  # Your password
+EMAIL_HOST_USER = os.environ.get('welcome_email')
+EMAIL_HOST_PASSWORD = os.environ.get('welcome_pwd')  # Your password
 EMAIL_USE_TLS = True
-DEFAULT_FROM_EMAIL = 'gomoore705@gmail.com'
+DEFAULT_FROM_EMAIL = os.environ.get('welcome_email')
 
 CORS_REPLACE_HTTPS_REFERER = True
 HOST_SCHEME = "https://"
