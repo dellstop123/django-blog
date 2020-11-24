@@ -7,15 +7,15 @@ from chat.views import get_message
 from chat.api import MessageModelViewSet, UserModelViewSet
 
 router = DefaultRouter()
-router.register(r'message', MessageModelViewSet, basename='message-api')
-router.register(r'user', UserModelViewSet, basename='user-api')
+router.register('message', MessageModelViewSet, basename='message-api')
+router.register('user', UserModelViewSet, basename='user-api')
 
 urlpatterns = [
-    url(r'api/v1/', include(router.urls)),
+    url('api/v1/', include(router.urls)),
 
-    url(r'^chat/$', login_required(
+    url('^chat/$', login_required(
         TemplateView.as_view(template_name='chat/chat.html')), name='home'),
-    url(r'^messages/$', get_message, name='chat_message')
+    url('^messages/$', get_message, name='chat_message')
 
     # url(r'^chat/$', user_logged_in, name='user_logged_in'),
     # url(r'^chat/$', user_logged_out, name='user_logged_out'),

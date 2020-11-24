@@ -76,15 +76,13 @@
       type="text/javascript"
     ></script>
     <!--  -->
-    {% register_notify_callbacks callbacks='fill_notification_list,fill_notification_badge' %}
+    
     <!--  -->
     {% block head_extra %}
     <!--  -->
     {% endblock head_extra %}
     <!--  -->
 
-    <!--  -->
-    {% notifications_unread as unread_count %}
     <!--  -->
     {% include "messages_display.html" %}
 
@@ -229,27 +227,7 @@
           </li>
 
           {% endif %} {% endif %} {% endif %}
-                        <!-- Notification -->
-              {% if unread_count == 0 %}
-              <li >
-                <span class="fa fa-globe">Notifications</span>
-              </li>
-              {% else %}
-              <li class="pull-center">
-                <a href='{% url "notifications:mark_all_as_read" %}'>
-                  <span class="fa fa-globe" 
-                    >Notifications{% live_notify_badge badge_class="badge" %}</span
-                  >
-                </a>
-<!--                 <a href='{% url "notifications:mark_all_as_read" %}' id=""
-                  >mark as read</a
-                > -->
-                <ul class="dropdown-content">
-                  {% live_notify_list %}
-                </ul>
-              </li>
-              {% endif %}
-              <!-- Notification -->
+                
           <li class="subNav">
             <a
               href="#"

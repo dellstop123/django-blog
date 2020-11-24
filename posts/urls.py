@@ -18,19 +18,19 @@ from .views import (
 
 
 urlpatterns = [
-    url(r'^$', posts_list, name='list'),
-    url(r'^create/$', posts_create),
-    url(r'^(?P<slug>[\w-]+)/$', posts_detail, name='detail'),
-    url(r'^(?P<slug>[\w-]+)/edit/$', posts_update, name='update'),
-    url(r'^(?P<slug>[\w-]+)/image/delete-image/(?P<id>\d+)/$',
+    url('^$', posts_list, name='list'),
+    url('^create/$', posts_create),
+    url('^(?P<slug>[\w-]+)/$', posts_detail, name='detail'),
+    url('^(?P<slug>[\w-]+)/edit/$', posts_update, name='update'),
+    url('^(?P<slug>[\w-]+)/image/delete-image/(?P<id>\d+)/$',
         delete_image, name='delete-image'),
-    url(r'like_post/$', like_post, name='like_post'),
+    url('like_post/$', like_post, name='like_post'),
 #     url(r'^(?P<postid>\d+)/preference/(?P<userpreference>\d+)/$',
 #         postpreference, name='postpreference'),
-    url(r'^(?P<slug>[\w-]+)/mul-images/$', post_image, name='mul-images'),
-    url(r'^(?P<slug>[\w-]+)/image/$',
+    url('^(?P<slug>[\w-]+)/mul-images/$', post_image, name='mul-images'),
+    url('^(?P<slug>[\w-]+)/image/$',
         display_image, name='image'),
-    url(r'^(?P<slug>[\w-]+)/delete/$', posts_delete, name='delete'),
+    url('^(?P<slug>[\w-]+)/delete/$', posts_delete, name='delete'),
 
 
 ]

@@ -1,0 +1,3 @@
+[httpie.plugins.transport.v1]
+httpie_http2 = httpie_http2:HTTP2TransportPlugin
+

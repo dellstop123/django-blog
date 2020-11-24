@@ -6,6 +6,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from .models import Post, User, Images, AddUserProfile
 # from .models import Preference
 from .admin import PostModelAdmin
+from django.core import serializers
 from django.contrib import admin
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
@@ -23,14 +24,14 @@ except ImportError:
     from django.core.urlresolvers import reverse
 from newsapi import NewsApiClient
 import redis
-import os
+import os,json
 
-key  = os.environ.get('NEWS_KEY')
+key  = '494715a553904bed82706d32450566a8'
 host = os.environ.get('HOST')
 port = os.environ.get('port')
 password = os.environ.get('password')
 
-r = redis.Redis(host=host, port=port,password=password, db=0)
+r = redis.Redis(host='localhost', port=6379,password=password, db=0)
 # Create your views here.
 
 
@@ -132,7 +133,7 @@ def posts_create(request):
 def posts_detail(request, slug=None):
     instance = get_object_or_404(Post, slug=slug)
     post_id = instance.pk
-    total_views = r.incr(f'post:{post_id}:views')
+    # total_views = r.incr(f'post:{post_id}:views')
     image = Images.objects.filter(post=post_id)
     count = Images.objects.filter(post=post_id).count()
     count1 = Post.objects.filter(image=instance.image).count()
@@ -186,7 +187,7 @@ def posts_detail(request, slug=None):
         "liked": liked,
         "image": image,
         "count": range(0, total_count),
-        'total_views': total_views,
+        # 'total_views': total_views,
     }
     return render(request, "post_detail.html", context)
 
@@ -235,6 +236,9 @@ def posts_list(request, id=None):
         # "img": img,
 
     }
+    # post_lists = serializers.serialize('json',queryset)
+    # string = json.dumps(context)
+    # return HttpResponse(string,content_type="text/json")
     return render(request, "post_list.html", context)
 
 

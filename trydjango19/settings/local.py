@@ -16,12 +16,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(
 # BASE_DIR = os.path.dirname((os.path.realpath(__file__)))
 # SECURITY WARNING: keep the secret key used in production secret!
 
-SECRET_KEY = os.environ.get('SECRET_KEY')
+SECRET_KEY = 'y130-j9oz4r5aoamn_n=+s-*7n)*3^s$jmf4(qw6ik28()g^(n'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['blog-book-1.herokuapp.com','www.myblogbook.xyz','myblogbook.xyz']
+ALLOWED_HOSTS = ['*']
 # client = pymongo.MongoClient(
 #     "mongodb+srv://guneet_007:<password>@cluster0-qcsk6.mongodb.net/test?retryWrites=true&w=majority")
 # db = client.test
@@ -45,7 +45,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sitemaps',
     'django.contrib.sites',
-    'payments.apps.PaymentsConfig',
     # third party
     'crispy_forms',
     'markdown_deux',
@@ -110,7 +109,6 @@ CRISPY_TEMPLATE_PACK = 'bootstrap3'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -171,25 +169,25 @@ AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
 )
 
-SOCIAL_AUTH_GITHUB_KEY = os.environ.get('SOCIAL_AUTH_GITHUB_KEY')
-SOCIAL_AUTH_GITHUB_SECRET = os.environ.get('SOCIAL_AUTH_GITHUB_SECRET')
+SOCIAL_AUTH_GITHUB_KEY = '3e914d8c4d507f4a277d'
+SOCIAL_AUTH_GITHUB_SECRET = 'de93f906808aa8dc9957f91823b86a2da2bd9f81'
 
-SOCIAL_AUTH_FACEBOOK_KEY = os.environ.get('SOCIAL_AUTH_FACEBOOK_KEY')  # App ID
-SOCIAL_AUTH_FACEBOOK_SECRET = os.environ.get('SOCIAL_AUTH_FACEBOOK_SECRET')  # App Secret
+SOCIAL_AUTH_FACEBOOK_KEY = '250301186328137'  # App ID
+SOCIAL_AUTH_FACEBOOK_SECRET = '4e4b269f424cdf871fb00d03a5056286'  # App Secret
 
-SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = os.environ.get('SOCIAL_AUTH_GOOGLE_OAUTH2_KEY')  # App ID
-SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = os.environ.get('SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET')
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '331655553149-8fbilm514hb7cprger5r0kavum1j914f.apps.googleusercontent.com'  # App ID
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'flpIl_AFmII1S7-aIWz6P4si'
 
-SOCIAL_AUTH_LOGIN_ERROR_URL = '/'
-SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/posts/'
+SOCIAL_AUTH_LOGIN_ERROR_URL = '/settings/'
+SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/settings/'
 SOCIAL_AUTH_RAISE_EXCEPTIONS = False
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'pythonlogin',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'blogbook',
         'USER': 'root',
-        'PASSWORD': '',
+        'PASSWORD': 'SpaceX@123',
         'HOST': 'localhost',
         'PORT': '3306',
     }
@@ -288,8 +286,8 @@ CHANNEL_LAYERS = {
     "default": {
         "BACKEND": "channels_redis.core.RedisChannelLayer",
         "CONFIG": {
-            "hosts": [os.environ.get('REDIS_URL','redis://localhost:6379')],
-            "symmetric_encryption_keys": [SECRET_KEY],
+            "hosts": [('localhost',6379)],
+            
         },       
     },
 }
@@ -304,21 +302,12 @@ ACCOUNT_EMAIL_VERIFICATION = False
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'  # Set your email host
 EMAIL_PORT = 587
-EMAIL_HOST_USER = os.environ.get('welcome_email')
-EMAIL_HOST_PASSWORD = os.environ.get('welcome_pwd')  # Your password
+EMAIL_HOST_USER = 'shearshare055@gmail.com'
+EMAIL_HOST_PASSWORD = 'P@ssw0rd6nge'  # Your password
 EMAIL_USE_TLS = True
-DEFAULT_FROM_EMAIL = os.environ.get('welcome_email')
+DEFAULT_FROM_EMAIL = 'shearshare055@gmail.com'
 
-CORS_REPLACE_HTTPS_REFERER = True
-HOST_SCHEME = "https://"
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-SECURE_SSL_REDIRECT = True
-SESSION_COOKIE_SECURE = True
-CSRF_COOKIE_SECURE = True
-SECURE_HSTS_INCLUDE_SUBDOMAINS = True
-SECURE_HSTS_SECONDS = 1000000
-SECURE_FRAME_DENY = True
-SOCIAL_AUTH_REDIRECT_IS_HTTPS = True
+ACCOUNT_DEFAULT_HTTP_PROTOCOL = 'http'
 
 # CORS_REPLACE_HTTPS_REFERER = False
 # HOST_SCHEME = "http://"

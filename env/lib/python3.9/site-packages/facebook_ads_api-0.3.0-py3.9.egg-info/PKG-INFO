@@ -1,0 +1,26 @@
+Metadata-Version: 1.0
+Name: facebook-ads-api
+Version: 0.3.0
+Summary: Python client for the Facebook Ads API
+Home-page: http://github.com/narrowcast/facebook-ads-api
+Author: Chee-Hyung Yoon
+Author-email: yoonchee@gmail.com
+License: LICENSE
+Description: facebook-ads-api
+        ================
+        
+        Python client for the [Facebook Ads API](https://developers.facebook.com/docs/ads-api/).
+        
+        
+        Installation
+        ------------
+        pip install facebook-ads-api
+        
+        Usage
+        -----
+        
+            import facebook
+        
+            api = facebook.AdsAPI(access_token, app_id, app_secret)
+        
+Platform: UNKNOWN

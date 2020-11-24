@@ -1,0 +1,50 @@
+Metadata-Version: 2.0
+Name: httpie-http2
+Version: 0.0.1
+Summary: HTTP/2 plugin for HTTPie.
+Home-page: https://github.com/jakubroztocil/httpie-http2
+Author: Jakub Roztocil
+Author-email: jakub@roztocil.co
+License: BSD
+Download-URL: https://github.com/jakubroztocil/httpie-http2
+Platform: UNKNOWN
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Environment :: Plugins
+Classifier: License :: OSI Approved :: BSD License
+Classifier: Topic :: Internet :: WWW/HTTP
+Classifier: Topic :: Utilities
+Requires-Dist: httpie (>0.9.0)
+Requires-Dist: hyper
+
+httpie-http2
+============
+
+Experimental HTTP/2 plugin for `HTTPie <http://httpie.org>`_.
+
+
+Installation
+------------
+
+.. code-block:: bash
+
+    $ pip install -U httpie httpie-http2
+
+
+Usage
+-----
+
+.. code-block:: bash
+
+    $ http https://host
+
+
+Requirements
+------------
+
+* Python 2.7.9 or 3.4+
+* hyper_
+
+.. _hyper: https://github.com/Lukasa/hyper
+

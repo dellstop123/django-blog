@@ -1,0 +1,5 @@
+from .test_fixtures import FixturesTestCase
+from .test_context_processors import CurrentPlacementsTestCase
+from .test_performance import QueryCountsTestCase
+from .test_templatetags import RenderHeaderTestCase, RenderPlacementTestCase
+from .test_validators import PatternValidatorTestCase
