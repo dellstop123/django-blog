@@ -19,7 +19,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['blog-book-1.herokuapp.com','www.myblogbook.xyz','myblogbook.xyz']
 # client = pymongo.MongoClient(
