@@ -132,7 +132,7 @@ def posts_create(request):
 def posts_detail(request, slug=None):
     instance = get_object_or_404(Post, slug=slug)
     post_id = instance.pk
-    total_views = r.incr(f'post:{post_id}:views')
+#     total_views = r.incr(f'post:{post_id}:views')
     image = Images.objects.filter(post=post_id)
     count = Images.objects.filter(post=post_id).count()
     count1 = Post.objects.filter(image=instance.image).count()
@@ -186,7 +186,7 @@ def posts_detail(request, slug=None):
         "liked": liked,
         "image": image,
         "count": range(0, total_count),
-        'total_views': total_views,
+#         'total_views': total_views,
     }
     return render(request, "post_detail.html", context)
 
